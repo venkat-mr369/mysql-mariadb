@@ -53,13 +53,14 @@ Install the downloaded release package with the following command, replacing pla
 
 ```bash
 $> sudo rpm -Uvh platform-and-version-specific-package-name.rpm
-For example, for version n of the package for EL6-based systems, the command is:
 ```
-```bash
+For example, for version n of the package for EL6-based systems, the command is:
+
+
 rpm -ivh mysql80-community-release-el8-5.noarch.rpm
 yum repolist all | grep mysql
 
-
+```bash
 $> sudo dnf config-manager --disable mysql80-community
 $> sudo dnf config-manager --enable mysql-cluster-8.0-community
 
