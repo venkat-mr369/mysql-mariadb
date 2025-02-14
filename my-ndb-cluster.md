@@ -51,11 +51,11 @@ Select and download the release package for your platform.
 
 Install the downloaded release package with the following command, replacing platform-and-version-specific-package-name with the name of the downloaded package:
 
+```bash
 $> sudo rpm -Uvh platform-and-version-specific-package-name.rpm
 For example, for version n of the package for EL6-based systems, the command is:
-
-
-
+```
+```bash
 rpm -ivh mysql80-community-release-el8-5.noarch.rpm
 yum repolist all | grep mysql
 
@@ -67,7 +67,7 @@ $> yum repolist enabled | grep mysql
 !mysql-cluster-8.0-community/x86_64 MySQL Cluster 8.0 Community               18
 !mysql-connectors-community/x86_64  MySQL Connectors Community                31
 !mysql-tools-community/x86_64       MySQL Tools Community                     33
-
+```bash
 
 The subrepository for NDB Cluster 8.0 (Community edition) has now been enabled. Also in the list are a number of other subrepositories of the MySQL Yum repository that have been enabled by default.
 
