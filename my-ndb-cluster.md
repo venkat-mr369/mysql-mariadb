@@ -1,5 +1,5 @@
 -- ============
--- Introduction
+## Introduction
 -- ============
 The MySQL Cluster distributed database provides high availability and throughput for your MySQL database management system. 
 A MySQL Cluster consists of one or more management nodes (ndb_mgmd) that store the cluster’s configuration and control the data nodes (ndbd), 
