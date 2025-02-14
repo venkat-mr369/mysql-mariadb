@@ -67,7 +67,7 @@ $> yum repolist enabled | grep mysql
 !mysql-cluster-8.0-community/x86_64 MySQL Cluster 8.0 Community               18
 !mysql-connectors-community/x86_64  MySQL Connectors Community                31
 !mysql-tools-community/x86_64       MySQL Tools Community                     33
-```bash
+```
 
 The subrepository for NDB Cluster 8.0 (Community edition) has now been enabled. Also in the list are a number of other subrepositories of the MySQL Yum repository that have been enabled by default.
 
@@ -75,19 +75,22 @@ Installing MySQL NDB Cluster
 For a minimal installation of MySQL NDB Cluster, follow these steps (for dnf-enabled systems, replace yum in the commands with dnf):
 
 Install the components for SQL nodes:
-
+```bash
 $> sudo yum install mysql-cluster-community-server
+```
 After the installation is completed, start and initialize the SQL node by following the steps given in Starting the MySQL Server.
 
 If you choose to initialize the data directory manually using the mysqld --initialize command (see Initializing the Data Directory for details), a root password is going to be generated and stored in the SQL node's error log; see MySQL Server Initialization for how to find the password, and for a few things you need to know about it.
 
 Install the executables for data nodes:
 
-
+```bash
 $> sudo yum install mysql-cluster-community-data-node
+```
 Install the executables for management nodes:
-
+```bash
 $> sudo yum install mysql-cluster-community-management-server
+```
 -- ============
 -- Prerequisites
 -- ============
