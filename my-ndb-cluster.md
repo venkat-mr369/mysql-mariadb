@@ -39,9 +39,9 @@ only run during system start up and reconfiguration. Other components of the MyS
 Certainly, these nodes run on a MySQL server that has access to cluster storage. Multiple MySQL servers can be connected to a cluster. Consequently, 
 it provides redundancy and performance through parallel processing. When you perform updates on one MySQL server, they are immediately reflected on 
 other servers connected to the cluster.
--- ============
--- Installation
--- ============
+
+##Installation
+
 Adding the MySQL Yum Repository
 First, add the MySQL Yum repository to your system's repository list. Follow these steps:
 
