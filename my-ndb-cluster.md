@@ -101,7 +101,7 @@ all machines /etc/hosts file should be added below machines information.
 192.168.56.222 oel86mysql2.localdomain oel86mysql2
 192.168.56.223 oel86mysql3.localdomain oel86mysql3
 
-To complete this tutorial, you will need a total of three servers: two servers for the redundant MySQL data nodes (ndbd), and one server for the Cluster Manager (ndb_mgmd) and MySQL server/client (mysqld and mysql).
+To complete this tutorial, you will need a total of 4 servers: two servers for the redundant MySQL data nodes (ndbd), and one server for the Cluster Manager (ndb_mgmd) and MySQL server/client (mysqld and mysql).
 
 A non-root user with sudo privileges configured.
 Be sure to note down the private IP addresses of your three Machines. In this tutorial our cluster nodes have the following private IP addresses:
