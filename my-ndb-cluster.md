@@ -92,15 +92,16 @@ Install the executables for management nodes:
 ```bash
 $> sudo yum install mysql-cluster-community-management-server
 ```
--- ============
--- Prerequisites
--- ============
+
+## Prerequisites
+
 all machines /etc/hosts file should be added below machines information.
-
-192.168.56.221 oel86mysql1.localdomain oel86mysql1
-192.168.56.222 oel86mysql2.localdomain oel86mysql2
-192.168.56.223 oel86mysql3.localdomain oel86mysql3
-
+```bash
+198.168.17.101 server1.localdomain server1
+198.168.17.102 server2.localdomain server2
+198.168.17.103 server3.localdomain server3
+198.168.17.104 server4.localdomain server4
+```
 To complete this tutorial, you will need a total of 4 servers: two servers for the redundant MySQL data nodes (ndbd), and one server for the Cluster Manager (ndb_mgmd) and MySQL server/client (mysqld and mysql).
 
 A non-root user with sudo privileges configured.
