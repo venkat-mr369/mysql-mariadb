@@ -106,9 +106,10 @@ To complete this tutorial, you will need a total of three servers: two servers f
 A non-root user with sudo privileges configured.
 Be sure to note down the private IP addresses of your three Machines. In this tutorial our cluster nodes have the following private IP addresses:
 
-198.168.56.221 will be the first data node and mysqld node
-198.168.56.222 will be the second data node and mysqld node
-198.168.56.223 will be the Cluster Manager 
+198.168.17.101 will be the Cluster Manager
+198.168.17.102 will be the first data node 
+198.168.17.103 will be the second data node 
+198.168.17.104 will be the mysqld node
 
 Configuring the data nodes and SQL nodes.  The my.cnf file needed for the data nodes is fairly simple. The configuration file should be located in the /etc directory and can be edited using any text editor. (Create the file if it does not exist.) For example:
 
