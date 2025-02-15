@@ -113,12 +113,12 @@ Be sure to note down the private IP addresses of your three Machines. In this tu
 198.168.17.104 will be the mysqld node
 
 Configuring the data nodes and SQL nodes.  The my.cnf file needed for the data nodes is fairly simple. The configuration file should be located in the /etc directory and can be edited using any text editor. (Create the file if it does not exist.) For example:
-
+```bash
 $> vi /etc/my.cnf
-Note
-We show vi being used here to create the file, but any text editor should work just as well.
+#Note
+#We show vi being used here to create the file, but any text editor should work just as well.
 
-For each data node and SQL node in our example setup, my.cnf should look like this:
+#For each data node and SQL node in our example setup, my.cnf should look like this:
 
 [mysqld]
 # Options for mysqld process:
@@ -127,6 +127,7 @@ ndbcluster                      # run NDB storage engine
 [mysql_cluster]
 # Options for NDB Cluster processes:
 ndb-connectstring=oel86mysql3  # location of management server
+```
 After entering the preceding information, save this file and exit the text editor. Do this for the machines hosting data node “A”, data node “B”, and the SQL node.
 
 Important
