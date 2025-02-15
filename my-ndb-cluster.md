@@ -151,40 +151,33 @@ Important note. Use host name not ip in config.ini file
 
 [ndb_mgmd]
 # Management process options:
-HostName=oel86mysql3          # Hostname or IP address of management node
+HostName=server1          # Hostname or IP address of management node
 DataDir=/var/lib/mysql-cluster  # Directory for management node log files
 
 [ndbd]
 # Options for data node "A":
                                 # (one [ndbd] section per data node)
-HostName=oel86mysql1          # Hostname or IP address
+HostName=server2                # Hostname or IP address
 NodeId=2                        # Node ID for this data node
-DataDir=/usr/local/mysql/data   # Directory for this data node's data files
+DataDir=/var/lib/mysql-cluster/data   # Directory for this data node's data files
 
 [ndbd]
 # Options for data node "B":
-HostName=oel86mysql2         # Hostname or IP address
+HostName=server3                # Hostname or IP address
 NodeId=3                        # Node ID for this data node
-DataDir=/usr/local/mysql/data   # Directory for this data node's data files
+DataDir=/var/lib/mysql-cluster/data   # Directory for this data node's data files
 
 [mysqld]
 # SQL node options:
-HostName=oel86mysql1          # Hostname or IP address
-NodeId=12
-                                # (additional mysqld connections can be
-                                # specified for this node for various
-                                # purposes such as running ndb_restore)
-[mysqld]
-# SQL node options:
-HostName=oel86mysql2          # Hostname or IP address
-NodeId=13
+HostName=server4                # Hostname or IP address
+NodeId=4
                                 # (additional mysqld connections can be
                                 # specified for this node for various
                                 # purposes such as running ndb_restore)
 ```
 save and close the file.
 
-Note
+Note:-
 The world database can be downloaded from https://dev.mysql.com/doc/index-other.html.
 
 After all the configuration files have been created and these minimal options have been specified, you are ready to proceed with starting the cluster and 
