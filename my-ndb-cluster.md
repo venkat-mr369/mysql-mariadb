@@ -215,15 +215,19 @@ Restart=on-failure
 WantedBy=multi-user.target
 ```
 After, save and close the file then reload the systemd daemon to apply the changes:
-
+## on mgmt server
+```bash
 systemctl daemon-reload
+```
 Following is to start and enable the Cluster Manager with the following command:
-
+```bash
 systemctl start ndb_mgmd
 systemctl enable ndb_mgmd
+```
 As noted, you can also check the active status with the following command:
-
+```bash
 systemctl status ndb_mgmd
+```
 
 On each of the data node hosts, run this command to start the ndbd process:
 
