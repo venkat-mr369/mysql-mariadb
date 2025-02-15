@@ -238,14 +238,16 @@ Your MySQL data node Droplet can now communicate with both the Cluster Manager a
 Finally, we’d also like the data node daemon to start up automatically when the server boots. We’ll follow the same procedure used for the Cluster Manager, and create a systemd service.
 
 Before we create the service, we’ll kill the running ndbd process:
-
+## On Data Node
+```bash
 sudo pkill -f ndbd
+```
 Now, open and edit the following systemd Unit file using your favorite editor:
-
-sudo nano /etc/systemd/system/ndbd.service
+```bash
+sudo vi /etc/systemd/system/ndbd.service
+```
 Paste in the following code:
-
-/etc/systemd/system/ndbd.service
+```bash
 [Unit]
 Description=MySQL NDB Data Node Daemon
 After=network.target auditd.service
@@ -259,6 +261,7 @@ Restart=on-failure
 
 [Install]
 WantedBy=multi-user.target
+```
 Here, we’ve added a minimal set of options instructing systemd on how to start, stop and restart the ndbd process. To learn more about the options used in this unit configuration, consult the systemd manual.
 
 Save and close the file.
