@@ -183,7 +183,7 @@ The world database can be downloaded from https://dev.mysql.com/doc/index-other.
 After all the configuration files have been created and these minimal options have been specified, you are ready to proceed with starting the cluster and 
 verifying that all processes ar								
 
- ## initial startup of ndb cluster
+ ## Initial startup of ndb cluster
 Starting the cluster is not very difficult after it has been configured. Each cluster node process must be started separately, and on the host where it resides. The management node should be started first, followed by the data nodes, and then finally by any SQL nodes:
 
 On the management host, issue the following command from the system shell to start the management node process:
@@ -264,47 +264,55 @@ WantedBy=multi-user.target
 ```
 Here, we’ve added a minimal set of options instructing systemd on how to start, stop and restart the ndbd process. To learn more about the options used in this unit configuration, consult the systemd manual.
 
-Save and close the file.
+:wq! Save and close the file 
 
 Now, reload systemd’s manager configuration using daemon-reload:
-
+```bash
 sudo systemctl daemon-reload
+```
 We’ll now enable the service we just created so that the data node daemon starts on reboot:
-
+```bash
 sudo systemctl enable ndbd
-Finally, we’ll start the service:
-
+```
+Finally, you can start the service:
+```bash
 sudo systemctl start ndbd
+```
 You can verify that the NDB Cluster Management service is running:
-
+```bash
 sudo systemctl status ndbd
+```bash
 
 If you used RPM files to install MySQL on the cluster host where the SQL node is to reside, you can (and should) use the supplied startup script to start the MySQL server process on the SQL node.
 
 If all has gone well, and the cluster has been set up correctly, the cluster should now be operational. You can test this by invoking the ndb_mgm management node client. The output should look like that shown here, although you might see some slight differences in the output depending upon the exact version of MySQL that you are using:
 -- if error for data nodes use below on management node.
+```bash
 ndb_mgm -e "SHUTDOWN"
 ndb_mgmd --reload --config-file /var/lib/mysql-cluster/config.ini
 systemctl start ndb_mgmd
+```
 then restart mysqld on all mysql or api nodes.
+```bash
 systemctl restart mysqld
+```
 $> ndb_mgm
 -- NDB Cluster -- Management Client --
-ndb_mgm> Node 2: Started (version 8.0.33)
-Node 3: Started (version 8.0.33)
-         show
+it will install packages for first time
+```bash
+ndb_mgm> show
 Cluster Configuration
 ---------------------
 [ndbd(NDB)]     2 node(s)
-id=2    @192.168.56.221  (mysql-8.0.33 ndb-8.0.33, Nodegroup: 0, *)
-id=3    @192.168.56.222  (mysql-8.0.33 ndb-8.0.33, Nodegroup: 0)
+id=2    @192.168.17.102  (mysql-8.0.41 ndb-8.0.41, Nodegroup: 0, *)
+id=3    @192.168.17.103  (mysql-8.0.41 ndb-8.0.41, Nodegroup: 0)
 
 [ndb_mgmd(MGM)] 1 node(s)
-id=1    @192.168.56.223  (mysql-8.0.33 ndb-8.0.33)
+id=1    @192.168.17.101  (mysql-8.0.41 ndb-8.0.41)
 
-[mysqld(API)]   2 node(s)
-id=12   @192.168.56.221  (mysql-8.0.33 ndb-8.0.33)
-id=13   @192.168.56.222  (mysql-8.0.33 ndb-8.0.33)
+[mysqld(API)]   1 node(s)
+id=4    @192.168.17.104  (mysql-8.0.41 ndb-8.0.41)
+```
 
 The SQL node is referenced here as [mysqld(API)], which reflects the fact that the mysqld process is acting as an NDB Cluster API node.
 
@@ -393,20 +401,19 @@ Status: created=0, free=0, sizeof=48
 Status: latest_epoch=1438814044161, latest_trans_epoch=700079669256, latest_received_binlog_epoch=0, latest_handled_binlog_epoch=773094113280, latest_applied_binlog_epoch=0
 15 rows in set (0.03 sec)
 
-
-
-Test cases.
+** Test cases.
 
 Let’s create a table in one of the API node and see if all that table is accessible from the other API node.
-
- create database Emp;
- use Emp;
- CREATE TABLE NDB_test_emp(ename varchar(40),empid int) ENGINE=NDBCLUSTER;
-insert into NDB_test_emp(ename, empid) values('kashif',1);
-
+```bash
+create database demo;
+use demo;
+CREATE TABLE NDB_test_emp(ename varchar(40),empid int) ENGINE=NDBCLUSTER;
+insert into NDB_test_emp(ename, empid) values('venkat',1);
+insert into NDB_test_emp(ename, empid) values('kishore',2);
+```
 
 --- startup shutdown sequence
 1.    First, we need to stop all the API node.
 2.    Once all the API is down shutdown all the database and management node from the Management node using single command.
-systemctl stop mysqld on all mysql node
+systemctl stop mysqld on all mysql nodes
 ndb_mgm -e shutdown on management node
