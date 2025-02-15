@@ -134,13 +134,14 @@ Important
 Once you have started a mysqld process with the ndbcluster and ndb-connectstring parameters in the [mysqld] and [mysql_cluster] sections of the my.cnf file as shown previously, you cannot execute any CREATE TABLE or ALTER TABLE statements without having actually started the cluster. Otherwise, these statements fail with an error. This is by design.
 
 Configuring the management node.  The first step in configuring the management node is to create the directory in which the configuration file can be found and then to create the file itself. For example (running as root):
-
+```bash
 $> mkdir /var/lib/mysql-cluster
 $> cd /var/lib/mysql-cluster
 $> vi config.ini
+```
 For our representative setup, the config.ini file should read as follows:
 
-
+```bash
 [ndbd default]
 # Options affecting ndbd processes on all data nodes:
 NoOfReplicas=2    # Number of fragment replicas
@@ -180,7 +181,7 @@ NodeId=13
                                 # (additional mysqld connections can be
                                 # specified for this node for various
                                 # purposes such as running ndb_restore)
-
+```
 save and close the file.
 
 Note
