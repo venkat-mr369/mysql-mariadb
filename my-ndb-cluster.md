@@ -190,22 +190,23 @@ The world database can be downloaded from https://dev.mysql.com/doc/index-other.
 After all the configuration files have been created and these minimal options have been specified, you are ready to proceed with starting the cluster and 
 verifying that all processes ar								
 
- ************************initial startup of ndb cluster
+ ## initial startup of ndb cluster
 Starting the cluster is not very difficult after it has been configured. Each cluster node process must be started separately, and on the host where it resides. The management node should be started first, followed by the data nodes, and then finally by any SQL nodes:
 
 On the management host, issue the following command from the system shell to start the management node process:
-
+```bash
 $> ndb_mgmd --initial -f /var/lib/mysql-cluster/config.ini
+```
 The first time that it is started, ndb_mgmd must be told where to find its configuration file, using the -f or --config-file option. This option requires that --initial or --reload also be specified; see Section 23.5.4, “ndb_mgmd — The NDB Cluster Management Server Daemon”, for details.
 
 As you can see, the MySQL Cluster Manager is installed and running. Now, kill the running server and create a systemd file for Cluster manager:
 
-
+```bash
 pkill -f ndb_mgmd
-nano /etc/systemd/system/ndb_mgmd.service
-
+vi /etc/systemd/system/ndb_mgmd.service
+```
 Add the following configurations:
-
+```bash
 [Unit]
 Description=MySQL NDB Cluster Management Server
 After=network.target auditd.service
@@ -219,7 +220,7 @@ Restart=on-failure
 
 [Install]
 WantedBy=multi-user.target
-
+```
 After, save and close the file then reload the systemd daemon to apply the changes:
 
 systemctl daemon-reload
