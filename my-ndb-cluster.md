@@ -281,7 +281,7 @@ sudo systemctl start ndbd
 You can verify that the NDB Cluster Management service is running:
 ```bash
 sudo systemctl status ndbd
-```bash
+```
 
 If you used RPM files to install MySQL on the cluster host where the SQL node is to reside, you can (and should) use the supplied startup script to start the MySQL server process on the SQL node.
 
@@ -337,7 +337,7 @@ Once you are logged in, check the cluster status using the following command: to
 set password='Oracle_123';
 
 SHOW ENGINE NDB STATUS \G
-
+```bash
 mysql> SHOW ENGINE NDB STATUS \G
 *************************** 1. row ***************************
   Type: ndbclus
@@ -400,7 +400,7 @@ Status: created=0, free=0, sizeof=48
   Name: binlog
 Status: latest_epoch=1438814044161, latest_trans_epoch=700079669256, latest_received_binlog_epoch=0, latest_handled_binlog_epoch=773094113280, latest_applied_binlog_epoch=0
 15 rows in set (0.03 sec)
-
+```
 ** Test cases.
 
 Let’s create a table in one of the API node and see if all that table is accessible from the other API node.
