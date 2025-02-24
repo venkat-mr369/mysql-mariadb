@@ -106,6 +106,20 @@ drwxr-x--- 11 root root   99 Feb 15 22:39 ndb_2_fs
 -rw-r--r--  1 root root 938K Feb 15 23:44 ndb_2_trace.log.1
 -rw-r--r--  1 root root    1 Feb 15 23:44 ndb_2_trace.log.next
 ```
+```bash
+[root@server2 data]# cd ndb_2_fs/
+[root@server2 ndb_2_fs]# ls -lh
+total 0
+drwxr-x--- 5 root root 48 Feb 15 22:39 D1
+drwxr-x--- 3 root root 19 Feb 15 22:39 D10
+drwxr-x--- 3 root root 19 Feb 15 22:39 D11
+drwxr-x--- 5 root root 48 Feb 15 22:39 D2
+drwxr-x--- 3 root root 19 Feb 15 22:39 D8
+drwxr-x--- 3 root root 19 Feb 15 22:39 D9
+drwxr-x--- 8 root root 60 Feb 23 20:34 LCP
+drwxr-x--- 2 root root  6 Feb 15 22:37 LG
+drwxr-x--- 2 root root  6 Feb 15 22:37 TS
+```
 Now looking into **DATANODE2**, here it will create 
 ```bash
 [venkat@server3 ~]$ sudo -i
@@ -122,6 +136,19 @@ drwxr-x--- 11 root root   99 Feb 15 22:39 ndb_3_fs
 -rw-r--r--  1 root root    3 Feb 23 09:45 ndb_3.pid
 [root@server3 data]#
 ```
-
+```bash
+[root@server3 data]# cd ndb_3_fs/
+[root@server3 ndb_3_fs]# ls -lrt
+total 0
+drwxr-x--- 2 root root  6 Feb 15 22:39 TS
+drwxr-x--- 2 root root  6 Feb 15 22:39 LG
+drwxr-x--- 3 root root 19 Feb 15 22:39 D8
+drwxr-x--- 3 root root 19 Feb 15 22:39 D9
+drwxr-x--- 3 root root 19 Feb 15 22:39 D11
+drwxr-x--- 3 root root 19 Feb 15 22:39 D10
+drwxr-x--- 5 root root 48 Feb 15 22:39 D2
+drwxr-x--- 5 root root 48 Feb 15 22:39 D1
+drwxr-x--- 9 root root 69 Feb 23 20:34 LCP
+````
 
 
