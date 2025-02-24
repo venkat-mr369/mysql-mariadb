@@ -150,5 +150,24 @@ drwxr-x--- 5 root root 48 Feb 15 22:39 D2
 drwxr-x--- 5 root root 48 Feb 15 22:39 D1
 drwxr-x--- 9 root root 69 Feb 23 20:34 LCP
 ````
+Those directories (D1, D2, D8, D9, D10, D11) you're seeing within your NDB data directory are related to the storage and organization of data within the NDB cluster.  Think of them like folders where NDB keeps different parts of your database.  Here's a simplified explanation:
+
+*   **Data Storage:** NDB distributes data across multiple data nodes for redundancy and performance.  Each of those `D` numbered directories likely represents a *fragment* or *partition* of your overall database.  The numbers probably correspond to different partitions or divisions of the data.  NDB breaks down your tables and indexes and spreads them across these directories.
+
+*   **Fragmentation/Partitioning:**  Large tables are often split into smaller pieces (fragments or partitions) to make them easier to manage and query.  This is a common database technique.  Each `D` directory likely holds a different part of your tables.  So, some data from one table might be in D1, while other data from the same table might be in D2, and so on.
+
+*   **Node Affinity (Potentially):**  While not always the case, the `D` directories might have some relationship to the specific data nodes in your cluster. For example, D1 and D2 might primarily be associated with data node 1, while D8, D9, D10, and D11 might be related to data node 2.  However, NDB can move data around for load balancing, so this isn't a strict 1-to-1 mapping.
+
+*   **Internal NDB Structure:** These directories are part of NDB's *internal* organization.  You, as a user, don't usually need to directly interact with them.  NDB manages the data distribution and retrieval behind the scenes.  You work with the database tables as a whole, and NDB takes care of figuring out which `D` directory the data is in.
+
+*   **LCP (Likely Log/Checkpoint Files):**  The `LCP` directory probably contains log files or checkpoint files. These are important for recovery. Logs record changes to the database, and checkpoints are snapshots of the data at a specific point in time.  If a data node fails, NDB uses the logs and checkpoints to restore the data.
+
+*   **LG and TS (Likely Log Groups and Transaction System Data):**  `LG` probably refers to Log Groups (related to transaction logs), and `TS` likely refers to Transaction System data.  These contain metadata and information about transactions, which are essential for ensuring data consistency and integrity.
+
+**In Simple Terms:**
+
+Imagine you have a large library (your database).  NDB splits the books (data) into different sections (the `D` directories) and puts them in different rooms (data nodes) for better organization and to make it faster to find the book you need.  The `LCP`, `LG`, and `TS` directories are like the library's catalog, records of changes, and other important administrative files.
+
+**Important:** You generally should *not* manually move, delete, or modify anything within these directories unless you absolutely know what you're doing.  Doing so can corrupt your database.  NDB manages these directories automatically.
 
 
