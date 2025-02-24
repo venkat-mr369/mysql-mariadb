@@ -1,3 +1,4 @@
+***from SQL Node we have to run this comands
 ```bash
 [venkat@server4 ~]$ mysql -u root -pMysql@123
 mysql: [Warning] Using a password on the command line interface can be insecure.
