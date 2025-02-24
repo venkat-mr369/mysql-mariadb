@@ -47,3 +47,43 @@ mysql> show engines;
 +--------------------+---------+----------------------------------------------------------------+--------------+------+------------+
 11 rows in set (0.01 sec)
 ```
+```bash
+mysql> create database myapp;
+Query OK, 1 row affected (0.21 sec)
+
+mysql> use myapp;
+Database changed
+mysql> create table emp(id int primary key,name varchar(30),city varchar(30)) engine=ndbcluster;
+Query OK, 0 rows affected (0.31 sec)
+
+mysql> insert into emp values (1,'venkat','Bangalore');
+Query OK, 1 row affected (0.03 sec)
+
+mysql> insert into emp values (2,'vijaya','Hyderabad');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into emp values (3,'kishore','Hyderabad');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into emp values (4,'hari','Bangalore');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into emp values (5,'pratima','Tirupati');
+Query OK, 1 row affected (0.01 sec)
+```
+```bash
+mysql> select * from emp;
++----+---------+-----------+
+| id | name    | city      |
++----+---------+-----------+
+|  3 | kishore | Hyderabad |
+|  1 | venkat  | Bangalore |
+|  2 | vijaya  | Hyderabad |
+|  4 | hari    | Bangalore |
+|  5 | pratima | Tirupati  |
++----+---------+-----------+
+5 rows in set (0.02 sec)
+```
+
+
+
