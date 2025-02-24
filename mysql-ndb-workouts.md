@@ -1,4 +1,5 @@
-***from SQL Node*** we have to run this comands
+
+***from SQL Node (server4)*** we have to run this comands
 ```bash
 [venkat@server4 ~]$ mysql -u root -pMysql@123
 mysql: [Warning] Using a password on the command line interface can be insecure.
@@ -93,7 +94,7 @@ total 0
 total 0
 [root@server4 myapp]#
 ```
-Now looking into **DATANODE1**, here it will create 
+Now looking into **DATANODE1 (server2)**, here it will create 
 ```bash
 [root@server2 data]# pwd
 /var/lib/mysql-cluster/data
@@ -120,7 +121,7 @@ drwxr-x--- 8 root root 60 Feb 23 20:34 LCP
 drwxr-x--- 2 root root  6 Feb 15 22:37 LG
 drwxr-x--- 2 root root  6 Feb 15 22:37 TS
 ```
-Now looking into **DATANODE2**, here it will create 
+Now looking into **DATANODE2 (server3)**, here it will create 
 ```bash
 [venkat@server3 ~]$ sudo -i
 [root@server3 ~]# cd /var/lib/mysql-cluster/
