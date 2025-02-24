@@ -84,6 +84,44 @@ mysql> select * from emp;
 +----+---------+-----------+
 5 rows in set (0.02 sec)
 ```
+**In Server 4(SQLNode)** No files created 
+```bash
+[root@server4 ~]# ls -l /var/lib/mysql/myapp
+total 0
+[root@server4 ~]# cd /var/lib/mysql/myapp
+[root@server4 myapp]# ls -l
+total 0
+[root@server4 myapp]#
+```
+Now looking into **DATANODE1**, here it will create 
+```bash
+[root@server2 data]# pwd
+/var/lib/mysql-cluster/data
+[root@server2 data]# ls -lh
+total 1.1M
+-rw-r--r--  1 root root 1.1K Feb 15 23:44 ndb_2_error.log
+drwxr-x--- 11 root root   99 Feb 15 22:39 ndb_2_fs
+-rw-r--r--  1 root root 168K Feb 24 22:44 ndb_2_out.log
+-rw-r--r--  1 root root    3 Feb 23 09:45 ndb_2.pid
+-rw-r--r--  1 root root 938K Feb 15 23:44 ndb_2_trace.log.1
+-rw-r--r--  1 root root    1 Feb 15 23:44 ndb_2_trace.log.next
+```
+Now looking into **DATANODE2**, here it will create 
+```bash
+[venkat@server3 ~]$ sudo -i
+[root@server3 ~]# cd /var/lib/mysql-cluster/
+[root@server3 mysql-cluster]# pwd
+/var/lib/mysql-cluster
+[root@server3 mysql-cluster]# cd data
+[root@server3 data]# pwd
+/var/lib/mysql-cluster/data
+[root@server3 data]# ls -lh
+total 180K
+drwxr-x--- 11 root root   99 Feb 15 22:39 ndb_3_fs
+-rw-r--r--  1 root root 174K Feb 24 22:44 ndb_3_out.log
+-rw-r--r--  1 root root    3 Feb 23 09:45 ndb_3.pid
+[root@server3 data]#
+```
 
 
 
