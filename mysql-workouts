@@ -1,3 +1,4 @@
+```bash
 [venkat@server4 ~]$ mysql -u root -pMysql@123
 mysql: [Warning] Using a password on the command line interface can be insecure.
 Welcome to the MySQL monitor.  Commands end with ; or \g.
@@ -11,7 +12,7 @@ affiliates. Other names may be trademarks of their respective
 owners.
 
 Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
-
+```
 mysql> show databases;
 +--------------------+
 | Database           |
