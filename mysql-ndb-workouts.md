@@ -13,6 +13,7 @@ owners.
 
 Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
 ```
+```bash
 mysql> show databases;
 +--------------------+
 | Database           |
@@ -25,7 +26,8 @@ mysql> show databases;
 | sys                |
 +--------------------+
 6 rows in set (0.12 sec)
-
+```
+```bash
 mysql> show engines;
 +--------------------+---------+----------------------------------------------------------------+--------------+------+------------+
 | Engine             | Support | Comment                                                        | Transactions | XA   | Savepoints |
@@ -43,3 +45,4 @@ mysql> show engines;
 | ARCHIVE            | YES     | Archive storage engine                                         | NO           | NO   | NO         |
 +--------------------+---------+----------------------------------------------------------------+--------------+------+------------+
 11 rows in set (0.01 sec)
+```
