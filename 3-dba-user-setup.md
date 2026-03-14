@@ -81,7 +81,7 @@ Press **Enter for everything**.
 Check:
 
 ```bash
-ls ~/.ssh
+ls -l ~/.ssh
 ```
 
 You will see:
