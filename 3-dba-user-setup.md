@@ -117,7 +117,7 @@ ssh-copy-id dba@10.0.2.3
 
 ---
 
-# STEP 4 — Test passwordless login
+### STEP 4 — Test passwordless login
 
 Test from **ams-vm-1**:
 
@@ -196,7 +196,7 @@ ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQ... dba@ams-vm-1
 ```
 ---
 Copy the entire line.
----
+
 
 ### Step 2 — Create SSH folder
 
