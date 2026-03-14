@@ -141,7 +141,7 @@ Now **no password should ask**.
 
 ---
 
-# FINAL ARCHITECTURE
+#### FINAL ARCHITECTURE
 
 ```
 ams-vm-1 (10.0.1.2)
@@ -194,6 +194,7 @@ You will see something like:
 ```
 ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQ... dba@ams-vm-1
 ```
+---
 Copy the entire line.
 ---
 
