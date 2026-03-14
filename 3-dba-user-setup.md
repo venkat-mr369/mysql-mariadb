@@ -169,3 +169,138 @@ sudo access: yes
 * PostgreSQL Patroni
 * Ansible automation
 
+### In GCP try like this 
+Chandu, this error is happening because **password login is disabled on the target VM (10.0.2.2)**.
+`ssh-copy-id` works **only when password authentication is allowed**.
+
+Your error:
+
+```id="3u7o7u"
+Permission denied (publickey,gssapi-keyex,gssapi-with-mic)
+```
+
+means the server **accepts only SSH keys**, not passwords.
+
+So we must **copy the key manually once**.
+
+---
+
+### Step 1 — Get public key from ams-vm-1
+
+On **ams-vm-1** run:
+
+```bash id="b5m36s"
+cat ~/.ssh/id_rsa.pub
+```
+
+You will see something like:
+
+```id="k0q8l2"
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQ... dba@ams-vm-1
+```
+
+Copy the **entire line**.
+
+---
+
+# Step 2 — Login to target VM using GCP console
+
+Go to:
+
+**GCP Console → Compute Engine → ams-vm-2 → SSH**
+
+Login via **browser SSH**.
+
+---
+
+### Step 3 — Switch to dba user
+
+```bash id="x35gbo"
+sudo su - dba
+```
+
+---
+
+### Step 4 — Create SSH folder
+
+```bash id="gtmof1"
+mkdir -p ~/.ssh
+chmod 700 ~/.ssh
+```
+
+---
+
+### Step 5 — Add the key
+
+Open file:
+
+```bash id="j3tdax"
+vi ~/.ssh/authorized_keys
+```
+
+Paste the **public key you copied**.
+
+Save.
+
+---
+
+### Step 6 — Fix permissions
+
+```bash id="hpb0d6"
+chmod 600 ~/.ssh/authorized_keys
+```
+
+---
+
+# Step 7 — Test from ams-vm-1
+
+Back on **ams-vm-1** run:
+
+```bash id="2my30k"
+ssh dba@10.0.2.2
+```
+
+Now it should login **without password**.
+
+---
+
+# Repeat same for remaining nodes
+
+Copy key to:
+
+```id="n88f5y"
+10.0.3.2
+10.0.1.3
+10.0.2.3
+```
+
+---
+
+# Quick Visual
+
+```id="m8yiz1"
+ams-vm-1 (10.0.1.2)
+     │
+     ├──> 10.0.2.2
+     ├──> 10.0.3.2
+     ├──> 10.0.1.3
+     └──> 10.0.2.3
+```
+
+---
+
+💡 **Why this happened in GCP**
+
+GCP VMs use:
+
+```id="3q7vya"
+PasswordAuthentication no
+```
+
+in **/etc/ssh/sshd_config**.
+
+So `ssh-copy-id` fails.
+
+---
+
+
