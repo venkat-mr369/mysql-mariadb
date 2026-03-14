@@ -185,12 +185,16 @@ So we must **copy the key manually once**.
 
 ---
 
-### Step 1 — Switch to dba user
+### Step 1 — Switch to dba user on ams-vms-2 / as per above need to dba user then need to switch 
 
 ```bash id="x35gbo"
 sudo su - dba
 ```
-
+You will see something like:
+```
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQ... dba@ams-vm-1
+```
+Copy the entire line.
 ---
 
 ### Step 2 — Create SSH folder
