@@ -1,6 +1,19 @@
-# MySQL NDB Cluster Setup — ams-kap Project
+**Complete NDB Cluster setup guide, 5 parts covering the full setup:**
 
-## Cluster Architecture
+- **Part 1** — Management Node on `ams-vm-1` (10.0.1.2) — installs `ndb_mgmd`, creates `config.ini` with all node IPs, sets up systemd service
+- **Part 2** — Data Nodes on `ams-vm-2` and `ams-vm-3` — installs `ndbd`, configures `my.cnf` to point to management node, systemd service
+- **Part 3** — SQL Nodes on `ams-vm-4` and `ams-vm-5` — installs `mysqld`, sets NDB engine, resets root password
+- **Part 4** — Verification using `ndb_mgm show` to confirm all 5 nodes connected
+- **Part 5** — Replication test — insert on `ams-vm-4`, verify data appears on `ams-vm-5`
+
+**Key rules to follow:**
+- Always start in order: **Management → Data Nodes → SQL Nodes**
+- Always shutdown in reverse: **SQL Nodes → then `ndb_mgm -e "SHUTDOWN"`**
+- `/etc/hosts` must be updated on **all 5 VMs** before starting anything
+
+## MySQL NDB Cluster Setup — ams-kap Project
+
+### Cluster Architecture
 
 | VM | Internal IP | Role | Component |
 |---|---|---|---|
