@@ -1,32 +1,27 @@
-**DBA User setup**:
+```
+ams-vm-1 → 10.0.1.2
+ams-vm-2 → 10.0.2.2
+ams-vm-3 → 10.0.3.2
+ams-vm-4 → 10.0.1.3
+ams-vm-5 → 10.0.2.3
+```
 
-1️⃣ Create a **DBA user**
-2️⃣ Give **root/admin (sudo) privileges**
-3️⃣ Setup **passwordless SSH between servers**
-
-I will show **correct Linux admin method step-by-step**. 🧑‍💻
+Goal:
+✅ Create **dba user**
+✅ Give **root (sudo) access**
+✅ Enable **passwordless SSH between servers**
 
 ---
 
-# 1️⃣ Login as root
+### STEP 1 — Create DBA user (Run on ALL 5 VMs)
 
-First login as root on the server.
+Login to each VM from **GCP SSH console** and run:
 
 ```bash
 sudo -i
 ```
 
-or
-
-```bash
-su -
-```
-
----
-
-# 2️⃣ Create DBA user
-
-Example username: **dba**
+Create user:
 
 ```bash
 useradd -m -s /bin/bash dba
@@ -35,159 +30,142 @@ useradd -m -s /bin/bash dba
 Set password:
 
 ```bash
-passwd dba
+echo "dba:dba@123" | chpasswd
 ```
 
----
-
-# 3️⃣ Give sudo (admin) privileges
-
-Edit sudoers safely:
+Give **root privileges**:
 
 ```bash
-visudo
+echo "dba ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 ```
 
-Add this line:
-
-```bash
-dba ALL=(ALL) NOPASSWD:ALL
-```
-
-Now **dba user has root privileges**.
-
-Test:
-
-```bash
-su - dba
-sudo su -
-```
-
-You should become root.
-
----
-
-# 4️⃣ Create SSH directory for dba
-
-Login as **dba**:
+Switch to dba:
 
 ```bash
 su - dba
 ```
 
-Create SSH folder:
+Create SSH directory:
 
 ```bash
-mkdir ~/.ssh
+mkdir -p ~/.ssh
 chmod 700 ~/.ssh
 ```
 
+Do this **on all 5 servers**.
+
 ---
 
-# 5️⃣ Generate SSH keys
+# STEP 2 — Generate SSH key (ONLY on ams-vm-1)
 
-Run:
+Login to:
+
+```
+ams-vm-1
+```
+
+Switch to dba:
+
+```bash
+su - dba
+```
+
+Generate key:
 
 ```bash
 ssh-keygen -t rsa -b 2048
 ```
 
-Press **Enter** for all prompts.
+Press **Enter for everything**.
 
-Files created:
+Check:
 
 ```bash
-~/.ssh/id_rsa
-~/.ssh/id_rsa.pub
+ls ~/.ssh
+```
+
+You will see:
+
+```
+id_rsa
+id_rsa.pub
 ```
 
 ---
 
-# 6️⃣ Copy keys to other servers
+# STEP 3 — Copy SSH key to other servers
 
-Run from **source server**:
+Run from **ams-vm-1**:
 
-```bash
-ssh-copy-id dba@10.0.1.2
 ```
-
-```bash
 ssh-copy-id dba@10.0.2.2
 ```
 
-```bash
+Enter password:
+
+```
+dba@123
+```
+
+Then run:
+
+```
 ssh-copy-id dba@10.0.3.2
-```
-
-```bash
 ssh-copy-id dba@10.0.1.3
-```
-
-```bash
 ssh-copy-id dba@10.0.2.3
 ```
 
-Enter password first time.
+---
+
+# STEP 4 — Test passwordless login
+
+Test from **ams-vm-1**:
+
+```
+ssh dba@10.0.2.2
+```
+
+```
+ssh dba@10.0.3.2
+```
+
+```
+ssh dba@10.0.1.3
+```
+
+```
+ssh dba@10.0.2.3
+```
+
+Now **no password should ask**.
 
 ---
 
-# 7️⃣ Test passwordless login
+# FINAL ARCHITECTURE
 
-Example:
-
-```bash
-ssh dba@10.0.1.2
+```
+ams-vm-1 (10.0.1.2)
+        │
+        ├── SSH → ams-vm-2 (10.0.2.2)
+        ├── SSH → ams-vm-3 (10.0.3.2)
+        ├── SSH → ams-vm-4 (10.0.1.3)
+        └── SSH → ams-vm-5 (10.0.2.3)
 ```
 
-It should login **without password**.
+User:
+
+```
+dba
+password: dba@123
+sudo access: yes
+```
 
 ---
 
-# 8️⃣ Verify sudo privilege
-
-Inside remote server:
-
-```bash
-sudo su -
-```
-
-You should become root.
-
----
-
-# ✅ Final result
-
-Your **DBA environment will look like**:
-
-```bash
-User        : dba
-Privilege   : sudo/root
-SSH access  : passwordless
-Servers     : cluster nodes
-```
-
-Used for:
+✅ This above setup is used for below mentioned 
 
 * MySQL Cluster
 * Galera Cluster
-* PostgreSQL HA
-* Automation
-* Ansible
+* PostgreSQL Patroni
+* Ansible automation
 
----
-
-🔥 **Real DBA best practice**
-
-Most companies create:
-
-```bash
-useradd dba
-useradd mysql
-useradd postgres
-```
-
-Instead of using **root** directly.
-
----
-
-If you want, I can also show **professional DBA server hardening steps (10 commands)** used in **real production servers**. 🚀
