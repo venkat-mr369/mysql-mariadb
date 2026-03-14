@@ -207,7 +207,7 @@ chmod 700 ~/.ssh
 
 ---
 
-### Step 5 — Add the key
+### Step 3 — Add the key
 
 Open file:
 
@@ -221,7 +221,7 @@ Save.
 
 ---
 
-### Step 6 — Fix permissions
+### Step 4 — Fix permissions
 
 ```bash id="hpb0d6"
 chmod 600 ~/.ssh/authorized_keys
@@ -229,7 +229,7 @@ chmod 600 ~/.ssh/authorized_keys
 
 ---
 
-### Step 7 — Test from ams-vm-1
+### Step 5 — Test from ams-vm-1
 
 Back on **ams-vm-1** run:
 
@@ -241,7 +241,7 @@ Now it should login **without password**.
 
 ---
 
-# Repeat same for remaining nodes
+### Repeat same for remaining nodes
 
 Copy key to:
 
