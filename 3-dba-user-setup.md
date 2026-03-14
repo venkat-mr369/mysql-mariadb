@@ -170,7 +170,7 @@ sudo access: yes
 * Ansible automation
 
 ### In GCP try like this 
-Chandu, this error is happening because **password login is disabled on the target VM (10.0.2.2)**.
+**password login is disabled on the target VM (10.0.2.2)**.
 `ssh-copy-id` works **only when password authentication is allowed**.
 
 Your error:
@@ -185,35 +185,7 @@ So we must **copy the key manually once**.
 
 ---
 
-### Step 1 — Get public key from ams-vm-1
-
-On **ams-vm-1** run:
-
-```bash id="b5m36s"
-cat ~/.ssh/id_rsa.pub
-```
-
-You will see something like:
-
-```id="k0q8l2"
-ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQ... dba@ams-vm-1
-```
-
-Copy the **entire line**.
-
----
-
-# Step 2 — Login to target VM using GCP console
-
-Go to:
-
-**GCP Console → Compute Engine → ams-vm-2 → SSH**
-
-Login via **browser SSH**.
-
----
-
-### Step 3 — Switch to dba user
+### Step 1 — Switch to dba user
 
 ```bash id="x35gbo"
 sudo su - dba
@@ -221,7 +193,7 @@ sudo su - dba
 
 ---
 
-### Step 4 — Create SSH folder
+### Step 2 — Create SSH folder
 
 ```bash id="gtmof1"
 mkdir -p ~/.ssh
@@ -252,7 +224,7 @@ chmod 600 ~/.ssh/authorized_keys
 
 ---
 
-# Step 7 — Test from ams-vm-1
+### Step 7 — Test from ams-vm-1
 
 Back on **ams-vm-1** run:
 
