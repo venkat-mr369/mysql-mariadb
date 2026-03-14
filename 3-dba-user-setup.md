@@ -56,7 +56,7 @@ Do this **on all 5 servers**.
 
 ---
 
-# STEP 2 — Generate SSH key (ONLY on ams-vm-1)
+### STEP 2 — Generate SSH key (ONLY on ams-vm-1)
 
 Login to:
 
@@ -93,7 +93,7 @@ id_rsa.pub
 
 ---
 
-# STEP 3 — Copy SSH key to other servers
+### STEP 3 — Copy SSH key to other servers
 
 Run from **ams-vm-1**:
 
