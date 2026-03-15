@@ -822,37 +822,37 @@ mysql -u clusteradmin -p -h 127.0.0.1 -P 6446 -e "SELECT @@hostname;"
 
 ```
 ┌─────────────────────────────────────────────────────────────────────┐
-│  STEP 1: User & Access Setup                                       │
-│  ├── Create mysql user (nologin) on all 3 nodes                    │
-│  ├── Configure dzdo/sudo for venkat → mysql switch                 │
-│  └── Distribute SSH keys for mysql user across all nodes           │
+│  STEP 1: User & Access Setup                                        │
+│  ├── Create mysql user (nologin) on all 3 nodes                     │
+│  ├── Configure dzdo/sudo for venkat → mysql switch                  │
+│  └── Distribute SSH keys for mysql user across all nodes            │
 ├─────────────────────────────────────────────────────────────────────┤
-│  STEP 2: MySQL Installation                                        │
-│  ├── Add MySQL 8.0 repo on Oracle Linux 9                          │
-│  ├── Install mysql-server, mysql-shell, mysql-router               │
-│  └── Configure /etc/my.cnf with GR prerequisites                  │
+│  STEP 2: MySQL Installation                                         │
+│  ├── Add MySQL 8.0 repo on Oracle Linux 9                           │
+│  ├── Install mysql-server, mysql-shell, mysql-router                │
+│  └── Configure /etc/my.cnf with GR prerequisites                    │
 ├─────────────────────────────────────────────────────────────────────┤
-│  STEP 3: Instance Preparation                                      │
-│  ├── Initialize data directory                                     │
-│  ├── Start MySQL, set root password                                │
-│  ├── Create clusteradmin user on all nodes                         │
-│  └── Run dba.configureInstance() on all nodes                      │
+│  STEP 3: Instance Preparation                                       │
+│  ├── Initialize data directory                                      │
+│  ├── Start MySQL, set root password                                 │
+│  ├── Create clusteradmin user on all nodes                          │
+│  └── Run dba.configureInstance() on all nodes                       │
 ├─────────────────────────────────────────────────────────────────────┤
-│  STEP 4: Cluster Creation                                          │
-│  ├── dba.createCluster() on node 1 (primary)                      │
-│  ├── cluster.addInstance() for node 2 (clone recovery)             │
-│  └── cluster.addInstance() for node 3 (clone recovery)             │
+│  STEP 4: Cluster Creation                                           │
+│  ├── dba.createCluster() on node 1 (primary)                        │
+│  ├── cluster.addInstance() for node 2 (clone recovery)              │
+│  └── cluster.addInstance() for node 3 (clone recovery)              │
 ├─────────────────────────────────────────────────────────────────────┤
-│  STEP 5: Router Setup                                              │
-│  ├── Bootstrap MySQL Router against the cluster                    │
-│  ├── Start the router service                                      │
-│  └── Test R/W (port 6446) and R/O (port 6447) connections         │
+│  STEP 5: Router Setup                                               │
+│  ├── Bootstrap MySQL Router against the cluster                     │
+│  ├── Start the router service                                       │
+│  └── Test R/W (port 6446) and R/O (port 6447) connections           │
 ├─────────────────────────────────────────────────────────────────────┤
-│  STEP 6: Failover / Failback                                      │
-│  ├── Automatic: Built into Group Replication                       │
-│  ├── Manual switchover: cluster.setPrimaryInstance()               │
-│  ├── Node recovery: cluster.rejoinInstance()                       │
-│  └── Full outage: dba.rebootClusterFromCompleteOutage()            │
+│  STEP 6: Failover / Failback                                        │
+│  ├── Automatic: Built into Group Replication                        │
+│  ├── Manual switchover: cluster.setPrimaryInstance()                │
+│  ├── Node recovery: cluster.rejoinInstance()                        │
+│  └── Full outage: dba.rebootClusterFromCompleteOutage()             │
 └─────────────────────────────────────────────────────────────────────┘
 ```
 
