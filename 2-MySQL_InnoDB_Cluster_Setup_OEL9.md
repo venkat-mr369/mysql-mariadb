@@ -15,7 +15,7 @@
 
 ---
 
-## ⚠️ CRITICAL: `sudo -u mysql -i` vs `sudo -u mysql bash`
+### ⚠️ CRITICAL: `sudo -u mysql -i` vs `sudo -u mysql bash`
 
 **The Problem:**
 
@@ -60,7 +60,7 @@ This explicitly tells sudo to run `/bin/bash` (not `/sbin/nologin`), and `--logi
 
 ---
 
-## Architecture Flow
+### Architecture Flow
 
 ```
                         ┌──────────────────────────────┐
@@ -75,7 +75,7 @@ This explicitly tells sudo to run `/bin/bash` (not `/sbin/nologin`), and `--logi
      │   oel9-vm1      │ │   oel9-vm2      │ │   oel9-vm3      │
      │  10.10.100.101  │ │  10.10.100.102  │ │  10.10.100.103  │
      │  PRIMARY (R/W)  │ │  SECONDARY (R/O)│ │  SECONDARY (R/O)│
-     │                 │ │                  │ │                 │
+     │                 │ │                 │ │                 │
      │  MySQL 8.x      │ │  MySQL 8.x      │ │  MySQL 8.x      │
      │  Group Repl.    │ │  Group Repl.     │ │  Group Repl.    │
      └─────────────────┘ └──────────────────┘ └─────────────────┘
@@ -96,7 +96,7 @@ This explicitly tells sudo to run `/bin/bash` (not `/sbin/nologin`), and `--logi
 
 ---
 
-## Part 1: Create the `mysql` System User (nologin + sudo)
+### Part 1: Create the `mysql` System User (nologin + sudo)
 
 > **Perform on ALL 3 nodes** (`oel9-vm1`, `oel9-vm2`, `oel9-vm3`).  
 > **Run all commands as:** `venkat` (who has sudo/root access).
@@ -355,7 +355,7 @@ bash-5.1$ exit                             # Back to venkat
 
 ---
 
-## Part 3: SSH Key Distribution for the `mysql` User
+### Part 3: SSH Key Distribution for the `mysql` User
 
 > **Purpose:** Allow passwordless SSH between all 3 nodes as the `mysql` user. This is essential for failover/failback scripts, cloning, and cluster recovery.  
 > **Run all commands as:** `venkat` on `oel9-vm1` unless noted otherwise.
@@ -497,7 +497,7 @@ sudo -u mysql chmod 644 /var/lib/mysql/.ssh/known_hosts
 
 ---
 
-## Part 4: Install MySQL 8 on Oracle Linux 9
+### Part 4: Install MySQL 8 on Oracle Linux 9
 
 > **Perform on ALL 3 nodes.**  
 > **Run all commands as:** `venkat` with sudo.
@@ -552,7 +552,7 @@ mysqlrouter --version
 
 ---
 
-## Part 5: Configure MySQL for InnoDB Cluster
+### Part 5: Configure MySQL for InnoDB Cluster
 
 > **Perform on ALL 3 nodes** with node-specific values where noted.  
 > **Run all commands as:** `venkat` with sudo.
@@ -741,7 +741,7 @@ mysql -u root -p'YourStrongRootPassword!' -e "
 
 ---
 
-## Part 7: Prepare Instances with MySQL Shell
+### Part 7: Prepare Instances with MySQL Shell
 
 > **Perform from `oel9-vm1`.**  
 > **Run as:** `venkat` — switch to mysql first: `sudo -u mysql bash --login`
@@ -902,7 +902,7 @@ Expected output:
 
 ---
 
-## Part 9: Configure MySQL Router
+### Part 9: Configure MySQL Router
 
 > **Perform on the application server or on one of the cluster nodes.**  
 > **Run as:** `venkat` with sudo.
@@ -954,7 +954,7 @@ mysql -u clusteradmin -p'ClusterAdminPass!' -h 127.0.0.1 -P 6447 \
 
 ---
 
-## Part 10: Failover and Failback Operations
+### Part 10: Failover and Failback Operations
 
 > This is where the `mysql` user's SSH keys become critical — allowing seamless cross-node operations.
 
@@ -1228,48 +1228,48 @@ mysql -u clusteradmin -p'ClusterAdminPass!' -h 127.0.0.1 -P 6447 \
 
 ---
 
-## Part 12: Complete Workflow Summary
+### Part 12: Complete Workflow Summary
 
 ```
 ┌─────────────────────────────────────────────────────────────────────┐
-│  STEP 1: User & Access Setup                                       │
-│  ├── Create mysql user (nologin) on all 3 nodes                    │
-│  ├── Configure sudo (or dzdo) for venkat → mysql switch            │
-│  ├── Command: sudo -u mysql bash --login                           │
-│  └── Distribute SSH keys for mysql user across all nodes           │
+│  STEP 1: User & Access Setup                                        │
+│  ├── Create mysql user (nologin) on all 3 nodes                     │
+│  ├── Configure sudo (or dzdo) for venkat → mysql switch             │
+│  ├── Command: sudo -u mysql bash --login                            │
+│  └── Distribute SSH keys for mysql user across all nodes            │
 ├─────────────────────────────────────────────────────────────────────┤
-│  STEP 2: MySQL Installation                                        │
-│  ├── Add MySQL 8.0 repo on Oracle Linux 9                          │
-│  ├── Install mysql-server, mysql-shell, mysql-router               │
-│  └── Configure /etc/my.cnf with GR prerequisites                  │
+│  STEP 2: MySQL Installation                                         │
+│  ├── Add MySQL 8.0 repo on Oracle Linux 9                           │
+│  ├── Install mysql-server, mysql-shell, mysql-router                │
+│  └── Configure /etc/my.cnf with GR prerequisites                    │
 ├─────────────────────────────────────────────────────────────────────┤
-│  STEP 3: Instance Preparation                                      │
-│  ├── Initialize data directory                                     │
-│  ├── Start MySQL, set root password                                │
-│  ├── Create clusteradmin user on all nodes                         │
-│  └── Run dba.configureInstance() on all nodes                      │
+│  STEP 3: Instance Preparation                                       │
+│  ├── Initialize data directory                                      │
+│  ├── Start MySQL, set root password                                 │
+│  ├── Create clusteradmin user on all nodes                          │
+│  └── Run dba.configureInstance() on all nodes                       │
 ├─────────────────────────────────────────────────────────────────────┤
-│  STEP 4: Cluster Creation                                          │
-│  ├── dba.createCluster() on node 1 (primary)                      │
-│  ├── cluster.addInstance() for node 2 (clone recovery)             │
-│  └── cluster.addInstance() for node 3 (clone recovery)             │
+│  STEP 4: Cluster Creation                                           │
+│  ├── dba.createCluster() on node 1 (primary)                        │
+│  ├── cluster.addInstance() for node 2 (clone recovery)              │
+│  └── cluster.addInstance() for node 3 (clone recovery)              │
 ├─────────────────────────────────────────────────────────────────────┤
-│  STEP 5: Router Setup                                              │
-│  ├── Bootstrap MySQL Router against the cluster                    │
-│  ├── Start the router service                                      │
-│  └── Test R/W (port 6446) and R/O (port 6447) connections         │
+│  STEP 5: Router Setup                                               │
+│  ├── Bootstrap MySQL Router against the cluster                     │
+│  ├── Start the router service                                       │
+│  └── Test R/W (port 6446) and R/O (port 6447) connections           │
 ├─────────────────────────────────────────────────────────────────────┤
-│  STEP 6: Failover / Failback                                      │
-│  ├── Automatic: Built into Group Replication                       │
-│  ├── Manual switchover: cluster.setPrimaryInstance()               │
-│  ├── Node recovery: cluster.rejoinInstance()                       │
-│  └── Full outage: dba.rebootClusterFromCompleteOutage()            │
+│  STEP 6: Failover / Failback                                        │
+│  ├── Automatic: Built into Group Replication                        │
+│  ├── Manual switchover: cluster.setPrimaryInstance()                │
+│  ├── Node recovery: cluster.rejoinInstance()                        │
+│  └── Full outage: dba.rebootClusterFromCompleteOutage()             │
 └─────────────────────────────────────────────────────────────────────┘
 ```
 
 ---
 
-## Appendix A: Quick Reference — sudo vs dzdo Commands
+### Appendix A: Quick Reference — sudo vs dzdo Commands
 
 | Action | sudo Command | dzdo Command (Centrify only) |
 |--------|-------------|------------------------------|
@@ -1278,7 +1278,7 @@ mysql -u clusteradmin -p'ClusterAdminPass!' -h 127.0.0.1 -P 6447 \
 | Run failover script | `sudo -u mysql bash /opt/mysql/scripts/failover.sh oel9-vm2` | `dzdo -u mysql bash /opt/mysql/scripts/failover.sh oel9-vm2` |
 | ❌ NEVER USE | `sudo -u mysql -i` | `dzdo -u mysql -i` |
 
-## Appendix B: Quick Reference — MySQL Shell Commands
+### Appendix B: Quick Reference — MySQL Shell Commands
 
 | Action | MySQL Shell Command |
 |--------|---------------------|
@@ -1296,7 +1296,7 @@ mysql -u clusteradmin -p'ClusterAdminPass!' -h 127.0.0.1 -P 6447 \
 
 ---
 
-## Appendix C: Troubleshooting
+### Appendix C: Troubleshooting
 
 | Issue | Cause | Fix |
 |-------|-------|-----|
