@@ -19,9 +19,9 @@
 
 ```
                         ┌──────────────────────────────┐
-                        │      MySQL Router (App)       │
-                        │   R/W → Primary (auto-routed) │
-                        │   R/O → Secondaries           │
+                        │      MySQL Router (App)      │
+                        │   R/W → Primary (auto-routed)│
+                        │   R/O → Secondaries          │
                         └──────────┬───────────────────┘
                                    │
               ┌────────────────────┼────────────────────┐
