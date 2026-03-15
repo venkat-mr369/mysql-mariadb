@@ -1,6 +1,6 @@
-# MySQL InnoDB Cluster 8 — Complete Setup Guide on Oracle Linux 9
+## MySQL InnoDB Cluster 8 — Complete Setup on Oracle Linux 9
 
-## Environment Overview
+### Environment Overview
 
 | Role | Hostname | IP Address |
 |------|----------|------------|
