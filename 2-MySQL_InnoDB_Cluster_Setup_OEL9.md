@@ -592,15 +592,18 @@ ssh venkat@oel9-vm2
 ```bash
 sudo -u mysql bash -c 'cat > ~/.ssh/id_ed25519 << "KEYEOF"
 -----BEGIN OPENSSH PRIVATE KEY-----
-b3BlbnNzaC1rZXktdjEAAAAABG5...
-... (paste your full private key here) ...
+b3BlbnNzaC1rZXktdjEAAAAABG5vbmUAAAAEbm9uZQAAAAAAAAABAAAAMwAAAAtzc2gtZW
+QyNTUxOQAAACBIsoPQISOYqjtaexMr/20WWCG7cWkrQpbGxxA3u4Y9HwAAAJjRc20H0XNt
+BwAAAAtzc2gtZWQyNTUxOQAAACBIsoPQISOYqjtaexMr/20WWCG7cWkrQpbGxxA3u4Y9Hw
+AAAEByPNCsoQ52fvgdDh522T5t5xGceo4HErWD6yC55L+wbkiyg9AhI5iqO1p7Eyv/bRZY
+IbtxaStClsbHEDe7hj0fAAAAFG15c3FsQGlubm9kYi1jbHVzdGVyAQ==
 -----END OPENSSH PRIVATE KEY-----
 KEYEOF'
 
 sudo -u mysql chmod 600 /var/lib/mysql/.ssh/id_ed25519
 
 # Also copy the public key
-echo 'ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAI.....your_key_here..... mysql@innodb-cluster' | \
+echo 'ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEiyg9AhI5iqO1p7Eyv/bRZYIbtxaStClsbHEDe7hj0f mysql@innodb-cluster' | \
   sudo -u mysql tee /var/lib/mysql/.ssh/id_ed25519.pub
 
 exit
@@ -619,14 +622,17 @@ ssh venkat@oel9-vm3
 ```bash
 sudo -u mysql bash -c 'cat > ~/.ssh/id_ed25519 << "KEYEOF"
 -----BEGIN OPENSSH PRIVATE KEY-----
-b3BlbnNzaC1rZXktdjEAAAAABG5...
-... (paste your full private key here) ...
+b3BlbnNzaC1rZXktdjEAAAAABG5vbmUAAAAEbm9uZQAAAAAAAAABAAAAMwAAAAtzc2gtZW
+QyNTUxOQAAACBIsoPQISOYqjtaexMr/20WWCG7cWkrQpbGxxA3u4Y9HwAAAJjRc20H0XNt
+BwAAAAtzc2gtZWQyNTUxOQAAACBIsoPQISOYqjtaexMr/20WWCG7cWkrQpbGxxA3u4Y9Hw
+AAAEByPNCsoQ52fvgdDh522T5t5xGceo4HErWD6yC55L+wbkiyg9AhI5iqO1p7Eyv/bRZY
+IbtxaStClsbHEDe7hj0fAAAAFG15c3FsQGlubm9kYi1jbHVzdGVyAQ==
 -----END OPENSSH PRIVATE KEY-----
 KEYEOF'
 
 sudo -u mysql chmod 600 /var/lib/mysql/.ssh/id_ed25519
 
-echo 'ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAI.....your_key_here..... mysql@innodb-cluster' | \
+echo 'ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEiyg9AhI5iqO1p7Eyv/bRZYIbtxaStClsbHEDe7hj0f mysql@innodb-cluster' | \
   sudo -u mysql tee /var/lib/mysql/.ssh/id_ed25519.pub
 
 exit
