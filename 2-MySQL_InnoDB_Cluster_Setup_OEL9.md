@@ -526,7 +526,8 @@ ssh venkat@oel9-vm2
 sudo -u mysql bash -c 'mkdir -p ~/.ssh && chmod 700 ~/.ssh'
 
 # Add the public key (paste the key you copied from Step A)
-echo 'ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAI.....your_key_here..... mysql@innodb-cluster' | \
+echo 'ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEiyg9AhI5iqO1p7Eyv/bRZYIbtxaStClsbHEDe7hj0f mysql@innodb-cluster
+' | \
   sudo -u mysql tee /var/lib/mysql/.ssh/authorized_keys
 
 sudo -u mysql chmod 600 /var/lib/mysql/.ssh/authorized_keys
