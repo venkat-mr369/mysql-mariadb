@@ -232,7 +232,7 @@ dba.configureInstance('clusteradmin@10.10.100.103:3306')
 ### 🧱 STEP 10: Create Cluster
 
 ```js
-var cluster = dba.createCluster('prodCluster')
+var cluster = dba.createCluster('ams-kapclu')
 ```
 
 ---
