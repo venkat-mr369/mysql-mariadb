@@ -85,4 +85,76 @@ Public key for mysql-community-server-8.0.45-1.el9.x86_64.rpm is not installed. 
 The downloaded packages were saved in cache until the next successful transaction.
 You can remove cached packages by executing 'dnf clean packages'.
 Error: GPG check FAILED
+===============================================================================================
+[venkat@oel9-vm3 ~]$ sudo rpm --import https://repo.mysql.com/RPM-GPG-KEY-mysql-2023
+[venkat@oel9-vm3 ~]$ rpm -qa gpg-pubkey*
+gpg-pubkey-a8d3785c-6536acda
+[venkat@oel9-vm3 ~]$ sudo dnf makecache
+MySQL 8.0 Community Server                                                                                       5.9 MB/s | 3.1 MB     00:00
+MySQL Connectors Community                                                                                       393 kB/s | 106 kB     00:00
+MySQL Tools Community                                                                                            1.6 MB/s | 1.4 MB     00:00
+Oracle Linux 9 BaseOS Latest (x86_64)                                                                            4.6 MB/s | 115 MB     00:24
+Oracle Linux 9 Application Stream Packages (x86_64)                                                              4.1 MB/s |  86 MB     00:20
+Oracle Linux 9 UEK Release 7 (x86_64)                                                                            4.6 MB/s |  97 MB     00:20
+Metadata cache created.
+[venkat@oel9-vm3 ~]$ sudo dnf install -y mysql-community-server
+Last metadata expiration check: 0:04:02 ago on Fri 20 Mar 2026 11:39:25 PM IST.
+Dependencies resolved.
+=================================================================================================================================================
+ Package                                         Architecture            Version                        Repository                          Size
+=================================================================================================================================================
+Installing:
+ mysql-community-server                          x86_64                  8.0.45-1.el9                   mysql80-community                   50 M
+Installing dependencies:
+ mysql-community-client                          x86_64                  8.0.45-1.el9                   mysql80-community                  3.3 M
+ mysql-community-client-plugins                  x86_64                  8.0.45-1.el9                   mysql80-community                  1.4 M
+ mysql-community-common                          x86_64                  8.0.45-1.el9                   mysql80-community                  556 k
+ mysql-community-icu-data-files                  x86_64                  8.0.45-1.el9                   mysql80-community                  2.3 M
+ mysql-community-libs                            x86_64                  8.0.45-1.el9                   mysql80-community                  1.5 M
+
+Transaction Summary
+=================================================================================================================================================
+Install  6 Packages
+
+Total download size: 59 M
+Installed size: 337 M
+Downloading Packages:
+(1/6): mysql-community-common-8.0.45-1.el9.x86_64.rpm                                                            985 kB/s | 556 kB     00:00
+(2/6): mysql-community-client-8.0.45-1.el9.x86_64.rpm                                                            2.7 MB/s | 3.3 MB     00:01
+(3/6): mysql-community-icu-data-files-8.0.45-1.el9.x86_64.rpm                                                    2.3 MB/s | 2.3 MB     00:01
+(4/6): mysql-community-libs-8.0.45-1.el9.x86_64.rpm                                                              2.6 MB/s | 1.5 MB     00:00
+(5/6): mysql-community-client-plugins-8.0.45-1.el9.x86_64.rpm                                                    787 kB/s | 1.4 MB     00:01
+(6/6): mysql-community-server-8.0.45-1.el9.x86_64.rpm                                                            4.6 MB/s |  50 MB     00:10
+-------------------------------------------------------------------------------------------------------------------------------------------------
+Total                                                                                                            4.7 MB/s |  59 MB     00:12
+Running transaction check
+Transaction check succeeded.
+Running transaction test
+Transaction test succeeded.
+Running transaction
+  Preparing        :                                                                                                                         1/1
+  Installing       : mysql-community-common-8.0.45-1.el9.x86_64                                                                              1/6
+  Installing       : mysql-community-client-plugins-8.0.45-1.el9.x86_64                                                                      2/6
+  Installing       : mysql-community-libs-8.0.45-1.el9.x86_64                                                                                3/6
+  Running scriptlet: mysql-community-libs-8.0.45-1.el9.x86_64                                                                                3/6
+  Installing       : mysql-community-client-8.0.45-1.el9.x86_64                                                                              4/6
+  Installing       : mysql-community-icu-data-files-8.0.45-1.el9.x86_64                                                                      5/6
+  Running scriptlet: mysql-community-server-8.0.45-1.el9.x86_64                                                                              6/6
+  Installing       : mysql-community-server-8.0.45-1.el9.x86_64                                                                              6/6
+  Running scriptlet: mysql-community-server-8.0.45-1.el9.x86_64                                                                              6/6
+  Verifying        : mysql-community-client-8.0.45-1.el9.x86_64                                                                              1/6
+  Verifying        : mysql-community-client-plugins-8.0.45-1.el9.x86_64                                                                      2/6
+  Verifying        : mysql-community-common-8.0.45-1.el9.x86_64                                                                              3/6
+  Verifying        : mysql-community-icu-data-files-8.0.45-1.el9.x86_64                                                                      4/6
+  Verifying        : mysql-community-libs-8.0.45-1.el9.x86_64                                                                                5/6
+  Verifying        : mysql-community-server-8.0.45-1.el9.x86_64                                                                              6/6
+
+Installed:
+  mysql-community-client-8.0.45-1.el9.x86_64                          mysql-community-client-plugins-8.0.45-1.el9.x86_64
+  mysql-community-common-8.0.45-1.el9.x86_64                          mysql-community-icu-data-files-8.0.45-1.el9.x86_64
+  mysql-community-libs-8.0.45-1.el9.x86_64                            mysql-community-server-8.0.45-1.el9.x86_64
+
+Complete!
+[venkat@oel9-vm3 ~]$
+
 
