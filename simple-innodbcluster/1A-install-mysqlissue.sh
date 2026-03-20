@@ -85,7 +85,11 @@ Public key for mysql-community-server-8.0.45-1.el9.x86_64.rpm is not installed. 
 The downloaded packages were saved in cache until the next successful transaction.
 You can remove cached packages by executing 'dnf clean packages'.
 Error: GPG check FAILED
-===============================================================================================
+
+# =============================================================================
+# STEP 2 — Issue Fixed, i did one by one like vm1, vm2 & vm3
+# =============================================================================
+
 [venkat@oel9-vm3 ~]$ sudo rpm --import https://repo.mysql.com/RPM-GPG-KEY-mysql-2023
 [venkat@oel9-vm3 ~]$ rpm -qa gpg-pubkey*
 gpg-pubkey-a8d3785c-6536acda
