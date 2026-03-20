@@ -1,4 +1,4 @@
-```sh
+
 [venkat@oel9-vm3 ~]$ sudo dnf install -y https://dev.mysql.com/get/mysql80-community-release-el9-1.noarch.rpm
 
 sudo dnf install -y mysql-community-server
@@ -85,4 +85,4 @@ Public key for mysql-community-server-8.0.45-1.el9.x86_64.rpm is not installed. 
 The downloaded packages were saved in cache until the next successful transaction.
 You can remove cached packages by executing 'dnf clean packages'.
 Error: GPG check FAILED
-```
+
