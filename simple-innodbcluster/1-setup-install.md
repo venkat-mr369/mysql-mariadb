@@ -184,7 +184,7 @@ sudo systemctl restart mysqld
 
 ---
 
-### 👤 STEP 7: Create cluster admin (ONLY vm1)
+### 👤 STEP 7: Create cluster admin (On all 3 vms) 
 
 ```bash
 mysql -uroot -p
@@ -195,6 +195,11 @@ CREATE USER 'clusteradmin'@'%' IDENTIFIED BY 'Cluster@123';
 GRANT ALL PRIVILEGES ON *.* TO 'clusteradmin'@'%' WITH GRANT OPTION;
 FLUSH PRIVILEGES;
 ```
+
+| Stage          | User creation             |
+| -------------- | ------------------------- |
+| Before cluster | 🔴 Create on ALL nodes    |
+| After cluster  | 🟢 Create on ANY one node |
 
 ---
 
