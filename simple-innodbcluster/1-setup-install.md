@@ -1,8 +1,11 @@
 Prerequiites Venkat is DBA, Venkat is install MySQL Innodb Cluster on 3 Node
 
 👉 You will login as **venkat (DBA user)**
+
 👉 venkat will use **sudo**
+
 👉 Firewall handled properly ✅
+
 👉 Clear which node / which user
 
 ---
