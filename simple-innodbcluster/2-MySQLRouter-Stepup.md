@@ -1,7 +1,7 @@
  **Production-style MySQL Router setup on vm4 (10.10.100.104)** step-by-step.
 
-👉 You’ll do as **venkat (DBA user with sudo)**
-👉 Clean, real-world setup 👇
+👉 You will do as **venkat (DBA user with sudo)**
+
 
 ---
 
@@ -21,7 +21,7 @@ sudo dnf install -y mysql-router
 
 ---
 
-# 🔥 STEP 3: Open Firewall (IMPORTANT)
+### 🔥 STEP 3: Open Firewall (IMPORTANT)
 
 ```bash
 sudo systemctl enable firewalld
@@ -38,7 +38,7 @@ sudo firewall-cmd --reload
 
 ---
 
-# 🚀 STEP 4: Bootstrap Router (MAIN STEP)
+### 🚀 STEP 4: Bootstrap Router (MAIN SETUP)
 
 👉 Run from vm4:
 
@@ -56,7 +56,7 @@ Cluster@123
 
 ---
 
-# 🧠 What this does
+### 🧠 What this does
 
 * Connects to your cluster (vm1/vm2/vm3)
 * Auto-detects topology
@@ -64,14 +64,14 @@ Cluster@123
 
 ---
 
-# 📁 STEP 5: Check files
+### 📁 STEP 5: Check OS files
 
 ```bash
 cd /home/venkat/mysqlrouter
 ls
 ```
 
-You’ll see:
+You will see:
 
 ```
 mysqlrouter.conf
@@ -83,7 +83,7 @@ run/
 
 ---
 
-# ▶️ STEP 6: Start Router
+### ▶️ STEP 6: Start Router
 
 ```bash
 ./start.sh
@@ -91,7 +91,7 @@ run/
 
 ---
 
-# 🔍 STEP 7: Verify ports
+### 🔍 STEP 7: Verify ports
 
 ```bash
 ss -tulnp | grep 644
@@ -106,9 +106,9 @@ ss -tulnp | grep 644
 
 ---
 
-# 🔥 STEP 8: TEST CONNECTION
+### 🔥 STEP 8: TEST CONNECTION
 
-## 👉 Write (PRIMARY)
+#### 👉 Write (PRIMARY)
 
 ```bash
 mysql -uclusteradmin -p -h 10.10.100.104 -P 6446
@@ -128,7 +128,7 @@ oel9-vm3   (current PRIMARY)
 
 ---
 
-## 👉 Read (SECONDARY)
+### 👉 Read (SECONDARY)
 
 ```bash
 mysql -uclusteradmin -p -h 10.10.100.104 -P 6447
@@ -146,7 +146,7 @@ oel9-vm1 or vm2
 
 ---
 
-# 🔥 STEP 9: FAILOVER TEST (REAL TEST)
+### 🔥 STEP 9: FAILOVER TEST (REALTIME TEST)
 
 👉 Stop PRIMARY (vm3)
 
@@ -174,7 +174,7 @@ oel9-vm1 or vm2 (NEW PRIMARY) 🔥
 
 ---
 
-# 🧠 What happened?
+#### 🧠 What happened?
 
 👉 Router automatically:
 
@@ -185,7 +185,7 @@ oel9-vm1 or vm2 (NEW PRIMARY) 🔥
 
 ---
 
-# ⚠️ Important production notes
+#### ⚠️ Important production notes
 
 👉 Router is:
 
@@ -204,20 +204,20 @@ oel9-vm1 or vm2 (NEW PRIMARY) 🔥
 
 ---
 
-# 🚀 You have now built FULL STACK HA
+#### 🚀 You have now built FULL STACK HA
 
-Chandu — now you completed:
+now you completed:
 
 ✅ InnoDB Cluster
 ✅ Failover testing
 ✅ Router setup
 ✅ Application routing
 
-👉 This is **complete production architecture** 💯
+This is **Complete production architecture** 💯
 
 ---
 
-# 🚀 Next level (if you want)
+# 🚀 Next level 
 
 👉 Multiple Router HA setup
 👉 Load balancer (VIP)
@@ -226,4 +226,4 @@ Chandu — now you completed:
 
 ---
 
-Cheppu next step 👍
+
