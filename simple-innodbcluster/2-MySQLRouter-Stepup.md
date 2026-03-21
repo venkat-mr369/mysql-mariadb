@@ -147,11 +147,13 @@ ls
 ```bash
 ./start.sh
 ```
+---
 Or
 ---
 ```bash 
 nohup ./start.sh > router.log 2>&1 &
 ```
+---
 0r
 ---
 ```bash
