@@ -60,9 +60,9 @@ Cannot read property 'status' of undefined (TypeError)
 
 | Scenario           | Status |
 | ------------------ | ------ |
-| Metadata exists    | ✅      |
-| GR running         | ❌      |
-| Cluster accessible | ❌      |
+| Metadata exists    | ✅     |
+| GR running         | ❌     |
+| Cluster accessible | ❌     |
 
 👉 **This is a FULL CLUSTER OUTAGE**
 
@@ -170,7 +170,7 @@ sudo systemctl restart mysqld
 
 ---
 
-# 🎯 Scenario
+### 🎯 Scenario
 
 👉 Current:
 
