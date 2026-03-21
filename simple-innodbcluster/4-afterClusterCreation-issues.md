@@ -148,13 +148,13 @@ sudo systemctl restart mysqld
 
 ---
 
-## 💡 Interview Explanation
+### 💡 Interview Explanation
 
 > In case of a full cluster outage where metadata exists but Group Replication is inactive on all nodes, we use `dba.rebootClusterFromCompleteOutage()` to restore the cluster safely using existing metadata.
 
 ---
 
-## 🚀 Outcome
+### 🚀 Outcome
 
 * Cluster restored successfully ✅
 * New PRIMARY elected automatically ✅
@@ -257,7 +257,7 @@ FROM performance_schema.replication_group_members;
 
 ---
 
-# ⚠️ Conditions (IMPORTANT)
+### ⚠️ Conditions (IMPORTANT)
 
 👉 Before running:
 
