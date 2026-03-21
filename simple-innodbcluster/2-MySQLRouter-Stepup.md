@@ -147,7 +147,15 @@ ls
 ```bash
 ./start.sh
 ```
-
+Or
+```bash 
+nohup ./start.sh > router.log 2>&1 &
+```
+0r
+```bash
+# Use built-in background mode
+./start.sh &
+```
 ---
 
 ### 🔍 STEP 12: Verify ports
