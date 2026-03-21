@@ -266,3 +266,170 @@ sudo dnf search mysql | grep router
 
 ---
 
+============================
+About Protocols
+============================
+
+Good question — this is **core to understanding MySQL Router and modern MySQL usage**.
+
+---
+
+### 🔍 Classic Protocol vs X Protocol in MySQL
+
+#### ✅ 1. Classic Protocol (Traditional MySQL)
+
+This is the **original MySQL protocol** that has existed for decades.
+
+### 🔹 Key Features
+
+* Uses **SQL queries**
+* Works with:
+
+  * `mysql` CLI
+  * JDBC / ODBC
+  * PHP, Python, Java apps
+* Default port:
+
+  * **3306 (server)**
+  * **6446 / 6447 (via Router)**
+
+---
+
+### 🔹 Example
+
+```sql
+SELECT * FROM users;
+INSERT INTO orders VALUES (...);
+```
+
+👉 Everything is **table-based (rows & columns)**
+
+---
+
+### 🔹 When you use it
+
+* Traditional applications
+* OLTP systems
+* Existing MySQL-based apps
+
+---
+
+#### ✅ 2. X Protocol (Modern / Document-Based)
+
+Introduced in **MySQL 5.7+**, part of MySQL’s move toward **NoSQL + modern APIs**.
+
+It works with the **MySQL Document Store**.
+
+---
+
+### 🔹 Key Features
+
+* Uses **X DevAPI (not just SQL)**
+* Supports:
+
+  * JSON documents
+  * CRUD operations like MongoDB
+* Default ports:
+
+  * **33060 (server)**
+  * **6448 / 6449 (via Router)**
+
+---
+
+### 🔹 Example (JavaScript style)
+
+```javascript
+db.users.add({ name: "Ravi", age: 30 })
+db.users.find("age > 25")
+```
+
+👉 Works like **document database (NoSQL style)**
+
+---
+
+### 🔹 Also supports SQL!
+
+You can still run:
+
+```sql
+SELECT * FROM users;
+```
+
+---
+
+#### 🧠 Key Differences
+
+| Feature       | Classic Protocol       | X Protocol                    |
+| ------------- | ---------------------- | ----------------------------- |
+| Query Type    | SQL only               | SQL + NoSQL (JSON)            |
+| Data Model    | Tables (rows/columns)  | Documents (JSON)              |
+| API           | Traditional connectors | X DevAPI                      |
+| Port (Router) | 6446 / 6447            | 6448 / 6449                   |
+| Use Case      | Legacy / standard apps | Modern apps / microservices   |
+| Protocol Type | Text-based             | Message-based (protobuf-like) |
+
+---
+
+#### 🔥 Simple Analogy
+
+* **Classic Protocol** = 📊 Excel tables (structured rows)
+* **X Protocol** = 📦 JSON documents (flexible structure)
+
+---
+
+#### 🚀 When Should You Use What?
+
+### ✔ Use Classic Protocol (MOST COMMON)
+
+* Existing apps
+* OLTP workloads
+* JDBC / ORM frameworks (Hibernate, etc.)
+
+👉 90% of production systems use this
+
+---
+
+### ✔ Use X Protocol (Modern Use Cases)
+
+* Microservices
+* JSON-heavy data
+* Flexible schema apps
+* Hybrid SQL + NoSQL needs
+
+---
+
+#### ⚠️ Important Reality
+
+Even though X Protocol is powerful:
+👉 Most enterprises still use **Classic Protocol**
+
+X Protocol is growing but not yet dominant.
+
+---
+
+#### 🔎 In Your Case (MySQL Router Setup)
+
+From your ports:
+
+* **6446 / 6447 → Classic → Your main app should use this**
+* **6448 / 6449 → X Protocol → optional / advanced usage**
+
+---
+
+#### 💡 Quick Test
+
+### Classic:
+
+```bash
+mysql -h <router> -P 6446 -u root -p
+```
+
+### X Protocol (MySQL Shell):
+
+```bash
+mysqlsh --uri root@<router>:6448
+```
+
+---
+
+
