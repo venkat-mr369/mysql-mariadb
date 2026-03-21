@@ -162,6 +162,64 @@ Or
 ```
 ---
 
+---
+
+### 🔥 3. BEST (Production standard) ✅
+
+👉 Run as **systemd service**
+
+---
+
+## 🔹 Create service file
+
+```bash
+sudo vi /etc/systemd/system/mysqlrouter.service
+```
+
+Paste:
+
+```ini
+[Unit]
+Description=MySQL Router
+After=network.target
+
+[Service]
+User=venkat
+ExecStart=/home/venkat/mysqlrouter/start.sh
+Restart=always
+LimitNOFILE=65536
+
+[Install]
+WantedBy=multi-user.target
+```
+
+---
+
+## 🔹 Reload systemd
+
+```bash
+sudo systemctl daemon-reexec
+sudo systemctl daemon-reload
+```
+
+---
+
+## 🔹 Start service
+
+```bash
+sudo systemctl start mysqlrouter
+```
+
+---
+
+## 🔹 Enable auto-start
+
+```bash
+sudo systemctl enable mysqlrouter
+```
+
+---
+
 ### 🔍 STEP 12: Verify ports
 
 ```bash
