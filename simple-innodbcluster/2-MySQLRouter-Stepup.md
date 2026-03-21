@@ -164,13 +164,13 @@ Or
 
 ---
 
-### 🔥 3. BEST (Production standard) ✅
+### 🔥 Production standard ✅
 
 👉 Run as **systemd service**
 
 ---
 
-## 🔹 Create service file
+#### 🔹 Create service file
 
 ```bash
 sudo vi /etc/systemd/system/mysqlrouter.service
@@ -195,7 +195,7 @@ WantedBy=multi-user.target
 
 ---
 
-## 🔹 Reload systemd
+#### 🔹 Reload systemd
 
 ```bash
 sudo systemctl daemon-reexec
@@ -204,7 +204,7 @@ sudo systemctl daemon-reload
 
 ---
 
-## 🔹 Start service
+#### 🔹 Start service
 
 ```bash
 sudo systemctl start mysqlrouter
@@ -212,7 +212,7 @@ sudo systemctl start mysqlrouter
 
 ---
 
-## 🔹 Enable auto-start
+#### 🔹 Enable auto-start
 
 ```bash
 sudo systemctl enable mysqlrouter
