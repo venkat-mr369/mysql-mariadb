@@ -87,10 +87,27 @@ UNREACHABLE / OFFLINE
 
 ```sql
 SELECT 
-MEMBER_HOST,
-COUNT_TRANSACTIONS_IN_QUEUE,
-COUNT_TRANSACTIONS_REMOTE_IN_APPLIER_QUEUE
-FROM performance_schema.replication_group_member_stats;
+    m.MEMBER_HOST,
+    m.MEMBER_PORT,
+    s.COUNT_TRANSACTIONS_IN_QUEUE,
+    s.COUNT_TRANSACTIONS_REMOTE_IN_APPLIER_QUEUE
+FROM performance_schema.replication_group_members m
+JOIN performance_schema.replication_group_member_stats s
+ON m.MEMBER_ID = s.MEMBER_ID;
+```
+```sql
+SELECT 
+    m.MEMBER_HOST,
+    m.MEMBER_PORT,
+    m.MEMBER_STATE,
+    m.MEMBER_ROLE,
+    s.COUNT_TRANSACTIONS_IN_QUEUE,
+    s.COUNT_TRANSACTIONS_REMOTE_IN_APPLIER_QUEUE
+FROM performance_schema.replication_group_members m
+JOIN performance_schema.replication_group_member_stats s
+ON m.MEMBER_ID = s.MEMBER_ID;
+
+
 ```
 
 👉 If value > 0:
