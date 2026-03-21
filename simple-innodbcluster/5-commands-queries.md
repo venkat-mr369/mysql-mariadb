@@ -622,24 +622,6 @@ Chandu — now you know:
 ✅ Split-brain
 ✅ Quorum
 
-👉 This is **serious production-level knowledge** 💯
-
----
-
-# 🚀 Next (as you said)
-
-👉 We’ll move to:
-
-# 🔥 Galera / Percona XtraDB Cluster
-
-I’ll cover:
-
-* Galera architecture
-* Quorum vs InnoDB difference
-* IST vs SST
-* Split-brain in Galera (different behavior 🔥)
-* Real interview questions
-
 ---
 
 
