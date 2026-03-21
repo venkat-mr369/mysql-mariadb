@@ -268,10 +268,10 @@ cluster.status()
 
 # 🚀 If you want next
 
-👉 I’ll give:
+👉 you will do:
 
 * [MySQL Router setup](https://github.com/venkat-mr369/mysql-cluster/blob/main/simple-innodbcluster/2-MySQLRouter-Stepup.md)
 * Failover demo (real-time test)
+  Stop mysqld in vm1 node and verify from vm2 or vm3
 * Troubleshooting errors (very important for interview)
 
-Just tell me 👍
