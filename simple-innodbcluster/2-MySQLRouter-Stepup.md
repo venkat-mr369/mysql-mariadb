@@ -423,10 +423,11 @@ From your ports:
 mysql -h 10.10.100.104 -P 6446 -u root -p
 ```
 
-### X Protocol (MySQL Shell): VM4
+### X Protocol (MySQL Shell): VM4 
+#### mysqlsh from vm1 
 
 ```bash
-mysqlsh --uri root@10.10.100.104:6448
+mysqlsh --uri clusteradmin@10.10.100.104:6448
 ```
 
 ---
