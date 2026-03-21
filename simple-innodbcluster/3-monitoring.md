@@ -1,31 +1,31 @@
-Super question Chandu 🔥 — this is **real DBA monitoring toolkit**.
-I’ll give you **cluster views + replication views + monitoring queries** (interview + real-time use).
+**DBA monitoring**.
+ **cluster views + replication views + monitoring queries**.
 
 ---
 
-# 🧱 1. MySQL Shell (Cluster level)
+### 🧱 1. MySQL Shell (Cluster level)
 
 👉 Use in `mysqlsh`
 
-## ✅ Basic status
+#### ✅ Basic status
 
 ```js
 cluster.status()
 ```
 
-## ✅ Clean view
+#### ✅ Clean view
 
 ```js
 cluster.describe()
 ```
 
-## ✅ Only topology
+#### ✅ Only topology
 
 ```js
 cluster.status().defaultReplicaSet.topology
 ```
 
-## ✅ Primary node
+#### ✅ Primary node
 
 ```js
 cluster.status().defaultReplicaSet.primary
@@ -33,7 +33,7 @@ cluster.status().defaultReplicaSet.primary
 
 ---
 
-# 🧠 2. Core Monitoring Tables (VERY IMPORTANT)
+### 🧠 2. Core Monitoring Tables (VERY IMPORTANT)
 
 👉 Login normal mysql:
 
@@ -43,9 +43,9 @@ mysql -uroot -p
 
 ---
 
-# 🔥 3. Group Replication (Cluster status)
+### 🔥 3. Group Replication (Cluster status)
 
-## ✅ Members status (MOST IMPORTANT)
+#### ✅ Members status (MOST IMPORTANT)
 
 ```sql
 SELECT 
@@ -59,7 +59,7 @@ FROM performance_schema.replication_group_members;
 
 ---
 
-## ✅ Who is PRIMARY?
+#### ✅ Who is PRIMARY?
 
 ```sql
 SELECT MEMBER_HOST 
@@ -69,7 +69,7 @@ WHERE MEMBER_ROLE='PRIMARY';
 
 ---
 
-## ✅ Online / offline nodes
+#### ✅ Online / offline nodes
 
 ```sql
 SELECT MEMBER_HOST, MEMBER_STATE 
@@ -78,7 +78,7 @@ FROM performance_schema.replication_group_members;
 
 ---
 
-# 🔄 4. Replication Stats (VERY IMPORTANT)
+### 🔄 4. Replication Stats (VERY IMPORTANT)
 
 ## ✅ Applier status
 
@@ -95,7 +95,7 @@ FROM performance_schema.replication_group_member_stats;
 
 ---
 
-## ✅ Check replication lag (approx)
+#### ✅ Check replication lag (approx)
 
 ```sql
 SELECT 
@@ -108,7 +108,7 @@ FROM performance_schema.replication_group_member_stats;
 
 ---
 
-# ⚡ 5. Replication Applier Threads
+### ⚡ 5. Replication Applier Threads
 
 ```sql
 SELECT * 
@@ -129,9 +129,9 @@ FROM performance_schema.replication_applier_status_by_worker;
 
 ---
 
-# 📊 6. Binary Log / GTID
+### 📊 6. Binary Log / GTID
 
-## ✅ GTID executed
+#### ✅ GTID executed
 
 ```sql
 SHOW VARIABLES LIKE 'gtid%';
@@ -143,7 +143,7 @@ SHOW MASTER STATUS;
 
 ---
 
-# 🔍 7. InnoDB Cluster metadata
+### 🔍 7. InnoDB Cluster metadata
 
 👉 Cluster info stored here:
 
@@ -157,7 +157,7 @@ SELECT * FROM mysql_innodb_cluster_metadata.instances;
 
 ---
 
-# 🔥 8. Check read-only mode
+### 🔥 8. Check read-only mode
 
 ```sql
 SELECT @@read_only, @@super_read_only;
@@ -177,7 +177,7 @@ SELECT @@read_only, @@super_read_only;
 
 ---
 
-# 🚨 9. Error / health check
+### 🚨 9. Error / health check
 
 ```sql
 SHOW ENGINE INNODB STATUS;
@@ -191,7 +191,7 @@ SHOW PROCESSLIST;
 
 ---
 
-# 📈 10. Quick health dashboard query
+### 📈 10. Quick health dashboard query
 
 ```sql
 SELECT 
@@ -206,7 +206,7 @@ USING (MEMBER_ID);
 
 ---
 
-# 🧠 11. Router monitoring (bonus)
+### 🧠 11. Router monitoring (bonus)
 
 👉 Check router logs:
 
@@ -217,7 +217,7 @@ tail -f mysqlrouter.log
 
 ---
 
-# 🔥 MOST IMPORTANT (remember these 5)
+### 🔥 MOST IMPORTANT (remember these 5)
 
 If interviewer asks:
 
@@ -231,13 +231,13 @@ If interviewer asks:
 
 ---
 
-# 🚀 Interview killer answer
+### 🚀 Interview killer answer
 
 > “I monitor InnoDB Cluster using performance_schema tables like replication_group_members and replication_group_member_stats along with MySQL Shell commands such as cluster.status().”
 
 ---
 
-# 💪 Real DBA tip
+### 💪 Real DBA tip
 
 👉 Daily monitoring:
 
@@ -247,12 +247,8 @@ If interviewer asks:
 * Read-only mode
 
 ---
-
-If you want next level 🔥
-👉 I can give:
-
+Issue Related
 * Alert scripts
 * Real production issues (node stuck, lag, split brain)
 * L2/L3 interview Q&A
 
-Cheppu 👍
