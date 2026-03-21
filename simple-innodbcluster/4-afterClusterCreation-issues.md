@@ -42,7 +42,7 @@ Cannot read property 'status' of undefined (TypeError)
 
 ---
 
-## 🧠 Root Cause
+### 🧠 Root Cause
 
 * MySQL InnoDB Cluster metadata exists ✅
 * But **Group Replication (GR) is NOT running** ❌
@@ -56,7 +56,7 @@ Cannot read property 'status' of undefined (TypeError)
 
 ---
 
-## 🔥 Situation Type
+### 🔥 Situation Type
 
 | Scenario           | Status |
 | ------------------ | ------ |
@@ -68,7 +68,7 @@ Cannot read property 'status' of undefined (TypeError)
 
 ---
 
-## ✅ Solution: Reboot Cluster from Complete Outage
+### ✅ Solution: Reboot Cluster from Complete Outage
 
 ### 👉 Step 1: Connect to any one node
 
@@ -94,7 +94,7 @@ cluster.status()
 
 ---
 
-## 🔄 If nodes do not auto join
+### 🔄 If nodes do not auto join
 
 ```js
 cluster.rejoinInstance('clusteradmin@10.10.100.102:3306')
@@ -103,7 +103,7 @@ cluster.rejoinInstance('clusteradmin@10.10.100.103:3306')
 
 ---
 
-## ⚙️ Permanent Fix (VERY IMPORTANT)
+### ⚙️ Permanent Fix (VERY IMPORTANT)
 
 ### Enable auto-start of Group Replication
 
@@ -129,7 +129,7 @@ sudo systemctl restart mysqld
 
 ---
 
-## 🧠 Key Learnings
+### 🧠 Key Learnings
 
 * `dba.getCluster()` works only when GR is active
 * Metadata alone is NOT enough
@@ -137,7 +137,7 @@ sudo systemctl restart mysqld
 
 ---
 
-## 📌 Command Usage Summary
+### 📌 Command Usage Summary
 
 | Scenario             | Command                                 |
 | -------------------- | --------------------------------------- |
