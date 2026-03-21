@@ -4,7 +4,7 @@
 [venkat@oel9-vm1 ~]
 ```
 
-❌ You are on vm1
+❌ You should not on vm1
 👉 We must do everything on **vm4 (10.10.100.104)**
 
 ---
