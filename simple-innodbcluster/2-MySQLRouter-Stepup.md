@@ -9,11 +9,11 @@
 
 ---
 
-# 🔥 COMPLETE CLEAN SETUP (vm4 only)
+### 🔥 COMPLETE CLEAN SETUP (vm4 only)
 
 ---
 
-# 🏗️ STEP 1: Login to vm4
+### 🏗️ STEP 1: Login to vm4
 
 ```bash
 ssh venkat@10.10.100.104
@@ -33,7 +33,7 @@ oel9-vm4
 
 ---
 
-# ⚙️ STEP 2: Install MySQL Repo (MANDATORY)
+### ⚙️ STEP 2: Install MySQL Repo (MANDATORY)
 
 👉 vm4 lo MySQL repo ledu, so install cheyyali:
 
@@ -43,7 +43,7 @@ sudo dnf install -y https://dev.mysql.com/get/mysql80-community-release-el9-1.no
 
 ---
 
-# 🔍 STEP 3: Enable repo
+### 🔍 STEP 3: Enable repo
 
 ```bash
 sudo dnf config-manager --enable mysql80-community
@@ -51,7 +51,7 @@ sudo dnf config-manager --enable mysql80-community
 
 ---
 
-# 🔑 STEP 4: Fix GPG key (same issue avoid cheyyadaniki)
+### 🔑 STEP 4: Fix GPG key (same issue to avoid)
 
 ```bash
 sudo rpm --import https://repo.mysql.com/RPM-GPG-KEY-mysql-2023
@@ -59,7 +59,7 @@ sudo rpm --import https://repo.mysql.com/RPM-GPG-KEY-mysql-2023
 
 ---
 
-# 🧹 STEP 5: Clean cache
+### 🧹 STEP 5: Clean cache
 
 ```bash
 sudo dnf clean all
@@ -68,7 +68,7 @@ sudo dnf makecache
 
 ---
 
-# 🔍 STEP 6: Verify repo
+### 🔍 STEP 6: Verify repo
 
 ```bash
 sudo dnf repolist | grep mysql
@@ -82,7 +82,7 @@ mysql80-community
 
 ---
 
-# 📦 STEP 7: Install MySQL Router
+### 📦 STEP 7: Install MySQL Router
 
 👉 Try this:
 
@@ -92,7 +92,7 @@ sudo dnf install -y mysql-router
 
 ---
 
-## ❗ If not found (very common)
+#### ❗ If not found (very common)
 
 👉 Use:
 
@@ -102,7 +102,7 @@ sudo dnf install -y mysql-community-router
 
 ---
 
-# 🔥 STEP 8: Open Firewall
+### 🔥 STEP 8: Open Firewall
 
 ```bash
 sudo systemctl enable firewalld
@@ -117,7 +117,7 @@ sudo firewall-cmd --reload
 
 ---
 
-# 🚀 STEP 9: Bootstrap Router
+### 🚀 STEP 9: Bootstrap Router
 
 ```bash
 mysqlrouter --bootstrap clusteradmin@10.10.100.101:3306 \
@@ -133,7 +133,7 @@ Cluster@123
 
 ---
 
-# 📁 STEP 10: Check files
+#### 📁 STEP 10: Check files
 
 ```bash
 cd /home/venkat/mysqlrouter
@@ -142,7 +142,7 @@ ls
 
 ---
 
-# ▶️ STEP 11: Start Router
+### ▶️ STEP 11: Start Router
 
 ```bash
 ./start.sh
@@ -150,7 +150,7 @@ ls
 
 ---
 
-# 🔍 STEP 12: Verify ports
+### 🔍 STEP 12: Verify ports
 
 ```bash
 ss -tulnp | grep 644
@@ -158,7 +158,7 @@ ss -tulnp | grep 644
 
 ---
 
-# 🔥 STEP 13: TEST
+### 🔥 STEP 13: TEST
 
 ```bash
 mysql -uclusteradmin -p -h 10.10.100.104 -P 6446
@@ -170,7 +170,7 @@ select @@hostname;
 
 ---
 
-# 🧠 MOST IMPORTANT FIX SUMMARY
+### 🧠 MOST IMPORTANT FIX SUMMARY
 
 | Issue                  | Fix                |
 | ---------------------- | ------------------ |
@@ -180,7 +180,7 @@ select @@hostname;
 
 ---
 
-# 🚀 If still issue comes
+### 🚀 If still issue comes
 
 Run this on vm4 and paste:
 
@@ -190,13 +190,9 @@ sudo dnf search mysql | grep router
 
 ---
 
-# 💡 Interview line
+#### 💡 Interview Tip
 
 > “MySQL Router installation requires MySQL community repository; it is not available in default OS repositories.”
 
 ---
 
-Chandu — once router installs, your setup becomes 🔥 **enterprise-grade**
-
-👉 Do till install step and send output
-I’ll verify before bootstrap 👍
