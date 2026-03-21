@@ -417,16 +417,16 @@ From your ports:
 
 #### 💡 Quick Test
 
-### Classic:
+### Classic:- VM4
 
 ```bash
-mysql -h <router> -P 6446 -u root -p
+mysql -h 10.10.100.104 -P 6446 -u root -p
 ```
 
-### X Protocol (MySQL Shell):
+### X Protocol (MySQL Shell): VM4
 
 ```bash
-mysqlsh --uri root@<router>:6448
+mysqlsh --uri root@10.10.100.104:6448
 ```
 
 ---
