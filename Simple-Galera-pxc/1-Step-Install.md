@@ -36,11 +36,11 @@ Synchronous replication
 ---
 # 🔥 STEP 0: Important Understanding
 
-👉 - Galera = multi-master (all nodes writable)
+👉 Galera = multi-master (all nodes writable)
 
-👉 - Needs minimum 3 nodes (quorum)
+👉 Needs minimum 3 nodes (quorum)
 
-👉 - Uses port:
+👉 Uses port:
 
 - 3306 (MySQL)
 - 4567 (replication)
