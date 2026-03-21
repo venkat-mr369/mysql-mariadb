@@ -42,10 +42,10 @@ Synchronous replication
 
 👉 Uses port:
 
-- 3306 (MySQL)
-- 4567 (replication)
-- 4444 (SST)
-- 4568 (IST)
+- **3306** – MySQL
+- **4567** – Replication
+- **4444** – SST (State Snapshot Transfer)
+- **4568** – IST (Incremental State Transfer)
 
 # 🚀 STEP 1: Common setup (ALL NODES)
 
