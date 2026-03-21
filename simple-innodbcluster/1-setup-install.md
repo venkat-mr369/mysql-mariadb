@@ -270,7 +270,7 @@ cluster.status()
 
 👉 I’ll give:
 
-* MySQL Router setup
+* [MySQL Router setup](https://github.com/venkat-mr369/mysql-cluster/blob/main/simple-innodbcluster/2-MySQLRouter-Stepup.md)
 * Failover demo (real-time test)
 * Troubleshooting errors (very important for interview)
 
