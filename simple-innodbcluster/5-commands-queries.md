@@ -1,4 +1,4 @@
-**Daily Activities & Maintenance activities** (this is real DBA level).
+**Daily Activities & Maintenance activities** (DBA Work).
 
 No theory — only **“how to check” commands** 👇
 
