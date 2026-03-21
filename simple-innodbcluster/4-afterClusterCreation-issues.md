@@ -6,7 +6,7 @@
 
 ---
 
-# 📄 **MySQL InnoDB Cluster - Full Outage Recovery **
+### 📄 **MySQL InnoDB Cluster - Full Outage Recovery **
 
 ````markdown
 # 🚨 MySQL InnoDB Cluster - Full Outage Scenario & Recovery
