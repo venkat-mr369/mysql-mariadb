@@ -160,20 +160,158 @@ sudo systemctl restart mysqld
 * New PRIMARY elected automatically ✅
 * Nodes rejoined as SECONDARY ✅
 
+---
+
+### 💡 Manual Failover
+
+**manual failover (controlled switchover)** in InnoDB Cluster.
+
+👉 Here YOU decide which node becomes PRIMARY
+
+---
+
+# 🎯 Scenario
+
+👉 Current:
+
+```text
+PRIMARY   : vm1
+SECONDARY : vm2, vm3
+```
+
+👉 Goal:
+
+```text
+PRIMARY   : vm2 ✅
+SECONDARY : vm1, vm3
 ```
 
 ---
 
-# 🔥 Done
+### 🔥 Method 1: Clean Manual Failover (Recommended)
 
-👉 This is **GitHub-ready**  
-👉 Clean + professional + interview-level  
+#### 👉 Step 1: Connect to any ONLINE node (vm1)
+
+```js
+\connect clusteradmin@10.10.100.101:3306
+```
+
+OR
+
+```js
+\connect clusteradmin@10.10.100.102:3306
+```
 
 ---
 
-If you want next:
-- I can create **full InnoDB Cluster lab doc (setup → failover → router → recovery)**  
-- Or **L2/L3 interview Q&A doc**
+#### 👉 Step 2: Get cluster
 
-Just tell me 👍
+```js
+var cluster = dba.getCluster()
 ```
+
+---
+
+#### 👉 Step 3: Switch PRIMARY to vm2
+
+```js
+cluster.setPrimaryInstance('oel9-vm2:3306')
+```
+
+---
+
+### ✅ Result
+
+👉 Now:
+
+```text
+PRIMARY   : vm2 🔥
+SECONDARY : vm1, vm3
+```
+
+---
+
+### 🔍 Verify
+
+```js
+cluster.status()
+```
+
+OR
+
+```sql
+SELECT MEMBER_HOST, MEMBER_ROLE 
+FROM performance_schema.replication_group_members;
+```
+
+---
+
+### 🧠 What happens internally
+
+* vm2 promoted to PRIMARY
+* vm1 becomes SECONDARY
+* No downtime (almost zero)
+* No data loss
+
+👉 This is **graceful switchover**
+
+---
+
+# ⚠️ Conditions (IMPORTANT)
+
+👉 Before running:
+
+✔ vm2 must be ONLINE
+✔ No replication lag
+✔ Cluster healthy
+
+---
+
+### ❌ If node not healthy
+
+👉 Command will fail like:
+
+```text
+instance not suitable
+```
+
+---
+
+### 🔥 Method 2: Force switch (not recommended)
+
+```js
+cluster.setPrimaryInstance('oel9-vm2:3306', {force: true})
+```
+
+👉 Use only:
+
+* Emergency
+* Node unstable
+
+---
+
+### 💡 Difference (Important)
+
+| Type            | Command            | Behavior   |
+| --------------- | ------------------ | ---------- |
+| Auto failover   | system decides     | on failure |
+| Manual failover | setPrimaryInstance | controlled |
+| Force failover  | force:true         | risky      |
+
+---
+
+### 🔥 testing
+
+After switching:
+
+```sql
+SELECT @@hostname;
+```
+
+👉 From Router (6446)
+👉 Should connect to vm2
+
+---
+
+
+
