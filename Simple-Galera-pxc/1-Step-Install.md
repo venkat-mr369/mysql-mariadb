@@ -1,4 +1,4 @@
-Perfect Chandu 🔥 — now we start **Galera / Percona XtraDB Cluster (PXC)** using your IPs.
+Start **Galera / Percona XtraDB Cluster (PXC)** using below IPs.
 
 ---
 
