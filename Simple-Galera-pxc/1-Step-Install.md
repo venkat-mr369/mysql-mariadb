@@ -34,6 +34,21 @@ Synchronous replication
 | Router needed  | No router needed     |
 
 ---
+# 🔥 STEP 0: Important Understanding
+
+👉 Galera = multi-master (all nodes writable)
+👉 Needs minimum 3 nodes (quorum)
+👉 Uses port:
+
+3306 (MySQL)
+
+4567 (replication)
+
+4444 (SST)
+
+4568 (IST)
+
+
 
 # 🚀 STEP 1: Common setup (ALL NODES)
 
