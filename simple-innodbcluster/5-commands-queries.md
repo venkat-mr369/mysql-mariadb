@@ -272,3 +272,357 @@ USING (MEMBER_ID);
 
 ---
 
+Perfect Chandu 🔥 — now you’re stepping into **real distributed systems thinking**.
+Let’s break this cleanly: **Split-brain + other critical scenarios in InnoDB Cluster**.
+
+---
+
+# 🧠 1. What is Split-Brain?
+
+👉 Simple meaning:
+
+```text
+Two nodes think they are PRIMARY at the same time ❌
+```
+
+👉 This leads to:
+
+* Data inconsistency
+* Conflicts
+* Corruption risk
+
+---
+
+# ⚠️ Example Scenario
+
+Cluster: 3 nodes
+
+```text
+vm1 (PRIMARY)
+vm2 (SECONDARY)
+vm3 (SECONDARY)
+```
+
+---
+
+## 🔥 Network partition happens
+
+```text
+Group A: vm1
+Group B: vm2 + vm3
+```
+
+👉 Now:
+
+* vm1 thinks → “I am PRIMARY”
+* vm2/vm3 elect new PRIMARY
+
+👉 Result:
+
+```text
+Two primaries ❌ → Split brain
+```
+
+---
+
+# ✅ How InnoDB Cluster prevents this
+
+👉 Uses **Quorum (majority voting)**
+
+---
+
+## 🧠 Rule:
+
+```text
+Majority = (N/2 + 1)
+```
+
+For 3 nodes:
+
+```text
+Majority = 2
+```
+
+---
+
+## 👉 What happens?
+
+### Case:
+
+* vm1 alone → 1 node ❌ (no majority)
+* vm2 + vm3 → 2 nodes ✅ (majority)
+
+---
+
+### Result:
+
+```text
+vm1 → goes OFFLINE (read-only)
+vm2/vm3 → continue cluster
+```
+
+👉 So:
+
+```text
+Split-brain prevented ✅
+```
+
+---
+
+# 🔥 Important line (interview)
+
+> “InnoDB Cluster prevents split-brain using quorum-based consensus where only the majority partition remains active.”
+
+---
+
+# ⚠️ What if only 2 nodes cluster?
+
+👉 Example:
+
+```text
+vm1 + vm2
+```
+
+👉 If network split:
+
+```text
+vm1 → 1 node
+vm2 → 1 node
+```
+
+👉 Both think:
+
+```text
+“I am primary” ❌
+```
+
+👉 Split-brain risk ⚠️
+
+---
+
+# ✅ Solution
+
+👉 Use:
+
+```text
+3 nodes OR 2 nodes + 1 arbitrator
+```
+
+---
+
+# 🧠 2. Other Important Real Scenarios
+
+---
+
+# 🔥 Scenario 1: Primary crash
+
+👉 vm1 crashes
+
+Result:
+
+```text
+vm2/vm3 elect new PRIMARY automatically ✅
+```
+
+👉 You already tested this 💪
+
+---
+
+# 🔥 Scenario 2: All nodes restart
+
+👉 After reboot:
+
+```text
+GR not started ❌
+Cluster DOWN ❌
+```
+
+👉 Fix:
+
+```js
+dba.rebootClusterFromCompleteOutage()
+```
+
+---
+
+# 🔥 Scenario 3: Node lagging
+
+👉 vm2 slow network
+
+```sql
+COUNT_TRANSACTIONS_IN_QUEUE > 0
+```
+
+👉 Result:
+
+* Lag increases
+* May be excluded
+
+---
+
+# 🔥 Scenario 4: Errant transactions
+
+👉 Node has extra data
+
+```text
+GTID mismatch ❌
+```
+
+👉 Fix:
+
+```text
+Clone / rejoin instance
+```
+
+👉 You already faced this 👌
+
+---
+
+# 🔥 Scenario 5: Node stuck in RECOVERING
+
+👉 During join:
+
+```text
+state = RECOVERING
+```
+
+👉 Reasons:
+
+* Large data
+* Network slow
+* Clone issue
+
+---
+
+# 🔥 Scenario 6: Read-only confusion
+
+👉 Check:
+
+```sql
+SELECT @@read_only, @@super_read_only;
+```
+
+👉 PRIMARY:
+
+```text
+0,0
+```
+
+👉 SECONDARY:
+
+```text
+1,1
+```
+
+---
+
+# 🔥 Scenario 7: Router misrouting
+
+👉 If Router misconfigured:
+
+* Writes may fail
+* App errors
+
+👉 Always test:
+
+```sql
+select @@hostname;
+```
+
+---
+
+# 🧠 3. Golden Rules (VERY IMPORTANT)
+
+👉 Remember these:
+
+### ✅ Rule 1:
+
+```text
+Minimum 3 nodes required
+```
+
+---
+
+### ✅ Rule 2:
+
+```text
+Majority decides cluster state
+```
+
+---
+
+### ✅ Rule 3:
+
+```text
+Only one PRIMARY in single-primary mode
+```
+
+---
+
+### ✅ Rule 4:
+
+```text
+Failed node rejoins as SECONDARY
+```
+
+---
+
+### ✅ Rule 5:
+
+```text
+Cluster metadata ≠ cluster running
+```
+
+---
+
+# 🚀 Interview killer answers
+
+### 👉 Split-brain:
+
+> “Split-brain occurs when multiple nodes act as primary due to network partition. InnoDB Cluster avoids this using quorum where only the majority partition remains active.”
+
+---
+
+### 👉 Why 3 nodes?
+
+> “To maintain quorum and avoid split-brain, minimum 3 nodes are required so that majority can be established.”
+
+---
+
+### 👉 Recovery:
+
+> “In case of full outage, cluster is restored using dba.rebootClusterFromCompleteOutage().”
+
+---
+
+# 🔥 Real DBA level achieved
+
+Chandu — now you know:
+
+✅ Failover
+✅ Manual failover
+✅ Recovery
+✅ Split-brain
+✅ Quorum
+
+👉 This is **serious production-level knowledge** 💯
+
+---
+
+# 🚀 Next (as you said)
+
+👉 We’ll move to:
+
+# 🔥 Galera / Percona XtraDB Cluster
+
+I’ll cover:
+
+* Galera architecture
+* Quorum vs InnoDB difference
+* IST vs SST
+* Split-brain in Galera (different behavior 🔥)
+* Real interview questions
+
+---
+
+
