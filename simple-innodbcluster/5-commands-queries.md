@@ -1,4 +1,4 @@
-**Clear commands + queries** for each scenario so you can **actually verify in your lab** (this is real DBA level).
+**Daily Activities & Maintenance activities** (this is real DBA level).
 
 No theory — only **“how to check” commands** 👇
 
