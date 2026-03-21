@@ -266,11 +266,10 @@ sudo dnf search mysql | grep router
 
 ---
 
-============================
-About Protocols
-============================
+----
+**About Protocols**
+---
 
-Good question — this is **core to understanding MySQL Router and modern MySQL usage**.
 
 ---
 
