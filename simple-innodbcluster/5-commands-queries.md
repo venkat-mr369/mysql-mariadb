@@ -1,19 +1,19 @@
-**clear commands + queries** for each scenario so you can **actually verify in your lab** (this is real DBA level).
+**Clear commands + queries** for each scenario so you can **actually verify in your lab** (this is real DBA level).
 
 No theory — only **“how to check” commands** 👇
 
 ---
 
-# 🧠 1. Check Cluster Overall Status
+### 🧠 1. Check Cluster Overall Status
 
-## 👉 MySQL Shell
+#### 👉 MySQL Shell
 
 ```js
 var cluster = dba.getCluster()
 cluster.status()
 ```
 
-## 👉 Clean view
+#### 👉 Clean view
 
 ```js
 cluster.describe()
@@ -21,7 +21,7 @@ cluster.describe()
 
 ---
 
-# 🔥 2. Check PRIMARY / SECONDARY
+### 🔥 2. Check PRIMARY / SECONDARY
 
 ```sql
 SELECT 
@@ -33,7 +33,7 @@ FROM performance_schema.replication_group_members;
 
 ---
 
-# 🔥 3. Check if node is writable (VERY IMPORTANT)
+### 🔥 3. Check if node is writable (VERY IMPORTANT)
 
 ```sql
 SELECT @@hostname, @@read_only, @@super_read_only;
@@ -46,7 +46,7 @@ SELECT @@hostname, @@read_only, @@super_read_only;
 
 ---
 
-# 🔥 4. Check Group Replication Running or NOT
+### 🔥 4. Check Group Replication Running or NOT
 
 ```sql
 SHOW STATUS LIKE 'group_replication%';
@@ -60,7 +60,7 @@ group_replication_running = ON / OFF
 
 ---
 
-# 🔥 5. Check Split-Brain / Quorum Status
+### 🔥 5. Check Split-Brain / Quorum Status
 
 ```sql
 SELECT 
@@ -83,7 +83,7 @@ UNREACHABLE / OFFLINE
 
 ---
 
-# 🔥 6. Check Replication Lag (VERY IMPORTANT)
+### 🔥 6. Check Replication Lag (VERY IMPORTANT)
 
 ```sql
 SELECT 
@@ -101,7 +101,7 @@ Replication lag present ⚠️
 
 ---
 
-# 🔥 7. Check Node Join / Recovery Status
+### 🔥 7. Check Node Join / Recovery Status
 
 ```sql
 SELECT 
@@ -118,7 +118,7 @@ FROM performance_schema.replication_group_members;
 
 ---
 
-# 🔥 8. Check GTID (Data consistency)
+### 🔥 8. Check GTID (Data consistency)
 
 ```sql
 SHOW MASTER STATUS;
@@ -132,7 +132,7 @@ SHOW VARIABLES LIKE 'gtid%';
 
 ---
 
-# 🔥 9. Check Cluster Metadata
+### 🔥 9. Check Cluster Metadata
 
 ```sql
 SELECT * FROM mysql_innodb_cluster_metadata.clusters;
@@ -144,7 +144,7 @@ SELECT * FROM mysql_innodb_cluster_metadata.instances;
 
 ---
 
-# 🔥 10. Check Errors (VERY IMPORTANT)
+### 🔥 10. Check Errors (VERY IMPORTANT)
 
 ```bash
 sudo tail -50 /var/log/mysqld.log
@@ -158,7 +158,7 @@ sudo tail -50 /var/log/mysqld.log
 
 ---
 
-# 🔥 11. Check Network Connectivity (split-brain debug)
+### 🔥 11. Check Network Connectivity (split-brain debug)
 
 From one node:
 
@@ -175,7 +175,7 @@ telnet 10.10.100.102 33061
 
 ---
 
-# 🔥 12. Check Ports (must be open)
+### 🔥 12. Check Ports (must be open)
 
 ```bash
 ss -tulnp | grep 33061
@@ -183,7 +183,7 @@ ss -tulnp | grep 33061
 
 ---
 
-# 🔥 13. Check Router routing
+### 🔥 13. Check Router routing
 
 ```bash
 mysql -uclusteradmin -p -h 10.10.100.104 -P 6446
@@ -195,7 +195,7 @@ SELECT @@hostname;
 
 ---
 
-# 🔥 14. Manual Failover Command
+### 🔥 14. Manual Failover Command
 
 ```js
 var cluster = dba.getCluster()
@@ -204,7 +204,7 @@ cluster.setPrimaryInstance('oel9-vm2:3306')
 
 ---
 
-# 🔥 15. Rejoin Node
+### 🔥 15. Rejoin Node
 
 ```js
 cluster.rejoinInstance('clusteradmin@10.10.100.103:3306')
@@ -212,7 +212,7 @@ cluster.rejoinInstance('clusteradmin@10.10.100.103:3306')
 
 ---
 
-# 🔥 16. Full Outage Recovery
+### 🔥 16. Full Outage Recovery
 
 ```js
 dba.rebootClusterFromCompleteOutage()
@@ -220,7 +220,7 @@ dba.rebootClusterFromCompleteOutage()
 
 ---
 
-# 🔥 17. Check if node stuck (advanced)
+### 🔥 17. Check if node stuck (advanced)
 
 ```sql
 SELECT * FROM performance_schema.replication_applier_status_by_worker;
@@ -228,7 +228,7 @@ SELECT * FROM performance_schema.replication_applier_status_by_worker;
 
 ---
 
-# 🔥 18. Process check
+### 🔥 18. Process check
 
 ```sql
 SHOW PROCESSLIST;
@@ -236,7 +236,7 @@ SHOW PROCESSLIST;
 
 ---
 
-# 🧠 REAL DBA QUICK CHECK (use this daily)
+### 🧠 REAL DBA QUICK CHECK (use this daily)
 
 ```sql
 SELECT 
@@ -251,7 +251,7 @@ USING (MEMBER_ID);
 
 ---
 
-# 🚀 Scenario Mapping (IMPORTANT)
+### 🚀 Scenario Mapping (IMPORTANT)
 
 | Scenario         | Command                   |
 | ---------------- | ------------------------- |
@@ -266,7 +266,7 @@ USING (MEMBER_ID);
 
 ---
 
-# 🔥 Interview killer line
+### 🔥 Interview killer line
 
 > “I use performance_schema tables like replication_group_members and replication_group_member_stats along with MySQL Shell commands to monitor cluster health, role, and replication lag.”
 
@@ -277,7 +277,7 @@ Let’s break this cleanly: **Split-brain + other critical scenarios in InnoDB C
 
 ---
 
-# 🧠 1. What is Split-Brain?
+### 🧠 1. What is Split-Brain?
 
 👉 Simple meaning:
 
@@ -293,7 +293,7 @@ Two nodes think they are PRIMARY at the same time ❌
 
 ---
 
-# ⚠️ Example Scenario
+### ⚠️ Example Scenario
 
 Cluster: 3 nodes
 
@@ -305,7 +305,7 @@ vm3 (SECONDARY)
 
 ---
 
-## 🔥 Network partition happens
+#### 🔥 Network partition happens
 
 ```text
 Group A: vm1
@@ -325,13 +325,13 @@ Two primaries ❌ → Split brain
 
 ---
 
-# ✅ How InnoDB Cluster prevents this
+### ✅ How InnoDB Cluster prevents this
 
 👉 Uses **Quorum (majority voting)**
 
 ---
 
-## 🧠 Rule:
+#### 🧠 Rule:
 
 ```text
 Majority = (N/2 + 1)
@@ -345,7 +345,7 @@ Majority = 2
 
 ---
 
-## 👉 What happens?
+#### 👉 What happens?
 
 ### Case:
 
@@ -369,13 +369,13 @@ Split-brain prevented ✅
 
 ---
 
-# 🔥 Important line (interview)
+### 🔥 Important line (interview)
 
 > “InnoDB Cluster prevents split-brain using quorum-based consensus where only the majority partition remains active.”
 
 ---
 
-# ⚠️ What if only 2 nodes cluster?
+### ⚠️ What if only 2 nodes cluster?
 
 👉 Example:
 
