@@ -411,6 +411,15 @@ SELECT * FROM test1;
 
 ---
 
+### Default Users from mysql.user table
+| User                       | Purpose                 |
+| -------------------------- | ----------------------- |
+| mysql.pxc.sst.user         | Used internally for SST |
+| mysql.pxc.internal.session | Cluster internal ops    |
+| mysql.infoschema           | metadata                |
+| mysql.sys                  | performance views       |
+
+
 ## Quick Troubleshooting Checklist
 
 If a node won't join, check these in order:
