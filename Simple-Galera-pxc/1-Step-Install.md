@@ -163,9 +163,9 @@ wsrep_log_conflicts=ON
 wsrep_sst_method=xtrabackup-v2
 
 # ╔══════════════════════════════════════════════════════════════╗
-# ║  REMOVED: wsrep_sst_auth — deprecated/removed in PXC 8.0   ║
-# ║  PXC 8.0 handles SST authentication automatically via the   ║
-# ║  internal mysql.pxc.sst.user account.                       ║
+# ║  REMOVED: wsrep_sst_auth — deprecated/removed in PXC 8.0     ║
+# ║  PXC 8.0 handles SST authentication automatically via the    ║
+# ║  internal mysql.pxc.sst.user account.                        ║
 # ╚══════════════════════════════════════════════════════════════╝
 
 pxc_strict_mode=ENFORCING
