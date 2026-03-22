@@ -121,7 +121,7 @@ Verdict: EXCELLENT performance
 
 ### CONFLICTS
 
-| # | Variable | Your Value | Meaning | Status |
+| # | Variable | Your M/C Value | Meaning | Status |
 |---|----------|-----------|---------|--------|
 | 19 | `wsrep_local_cert_failures` | `0` | Transactions REJECTED due to certification conflicts (two nodes writing same row). **0 = no conflicts at all** | ✅ Perfect |
 | 20 | `wsrep_local_bf_aborts` | `0` | Transactions killed (brute-force aborted) by a replicated write-set from another node. **0 = no conflicts** | ✅ Perfect |
