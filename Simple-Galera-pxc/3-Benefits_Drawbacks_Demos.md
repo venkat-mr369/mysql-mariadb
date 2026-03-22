@@ -1,4 +1,4 @@
-# PXC / Galera — Benefits & Drawbacks Deep Dive with SQL Demos
+# PXC / Galera — Benefits & Drawbacks Deep Dive with Demos
 
 ---
 
