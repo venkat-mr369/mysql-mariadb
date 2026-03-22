@@ -1,14 +1,14 @@
-# PXC 8.0 — Maintenance Activities & wsrep_provider_options Explained
+### PXC 8.0 — Maintenance Activities & wsrep_provider_options Explained
 
 ---
 
-## PART 1: wsrep_provider_options — Full Explanation
+#### PART 1: wsrep_provider_options — Full Explanation
 
 The `wsrep_provider_options` is one giant variable containing ALL Galera-level settings. Here's every parameter grouped by category:
 
 ---
 
-### 1. BASE SETTINGS — Node Identity
+#### 1. BASE SETTINGS — Node Identity
 
 | Parameter | Your Value | Meaning |
 |-----------|-----------|---------|
@@ -18,7 +18,7 @@ The `wsrep_provider_options` is one giant variable containing ALL Galera-level s
 
 ---
 
-### 2. EVS (Extended Virtual Synchrony) — Cluster Membership & Heartbeat
+#### 2. EVS (Extended Virtual Synchrony) — Cluster Membership & Heartbeat
 
 Controls how nodes detect each other, handle failures, and maintain group membership.
 
@@ -53,7 +53,7 @@ Heartbeat every 1s → No response for 5s → SUSPECTED
 
 ---
 
-### 3. GCACHE (Galera Cache) — Write-Set Cache for IST
+#### 3. GCACHE (Galera Cache) — Write-Set Cache for IST
 
 Stores recent write-sets so rejoining nodes can use IST (incremental) instead of full SST.
 
@@ -82,7 +82,7 @@ gcache.size = 128M (default)
 
 ---
 
-### 4. GCS (Group Communication System) — Flow Control
+#### 4. GCS (Group Communication System) — Flow Control
 
 Controls how fast nodes can send data and prevents slow nodes from falling behind.
 
@@ -112,7 +112,7 @@ Node falls behind → Receive queue grows
 
 ---
 
-### 5. GMCAST — Group Communication Transport
+#### 5. GMCAST — Group Communication Transport
 
 | Parameter | Your Value | Meaning |
 |-----------|-----------|---------|
@@ -134,7 +134,7 @@ Node falls behind → Receive queue grows
 
 ---
 
-### 7. PC (Primary Component) — Quorum & Split-Brain
+#### 7. PC (Primary Component) — Quorum & Split-Brain
 
 | Parameter | Your Value | Meaning |
 |-----------|-----------|---------|
@@ -161,7 +161,7 @@ Node falls behind → Receive queue grows
 
 ---
 
-### 8. REPL (Replication) — Write-Set Processing
+#### 8. REPL (Replication) — Write-Set Processing
 
 | Parameter | Your Value | Meaning |
 |-----------|-----------|---------|
@@ -173,7 +173,7 @@ Node falls behind → Receive queue grows
 
 ---
 
-### 9. CERT (Certification) — Conflict Detection
+#### 9. CERT (Certification) — Conflict Detection
 
 | Parameter | Your Value | Meaning |
 |-----------|-----------|---------|
@@ -182,7 +182,7 @@ Node falls behind → Receive queue grows
 
 ---
 
-### 10. SOCKET — Network & Encryption
+#### 10. SOCKET — Network & Encryption
 
 | Parameter | Your Value | Meaning |
 |-----------|-----------|---------|
@@ -194,7 +194,7 @@ Node falls behind → Receive queue grows
 
 ---
 
-### 11. ALLOCATOR — Disk Encryption for Galera
+#### 11. ALLOCATOR — Disk Encryption for Galera
 
 | Parameter | Your Value | Meaning |
 |-----------|-----------|---------|
@@ -204,9 +204,9 @@ Node falls behind → Receive queue grows
 
 ---
 
-## PART 2: Daily Maintenance Activities
+### PART 2: Daily Maintenance Activities
 
-### Daily Health Checks
+#### Daily Health Checks
 
 Run these commands daily from any node:
 
@@ -238,7 +238,7 @@ SHOW STATUS LIKE 'wsrep_local_cert_failures';
 SHOW STATUS LIKE 'wsrep_incoming_addresses';
 ```
 
-### Quick One-Liner Health Check
+#### Quick One-Liner Health Check
 
 ```bash
 mysql -uroot -p -e "
@@ -258,7 +258,7 @@ SHOW STATUS WHERE Variable_name IN (
 
 ---
 
-### Weekly Maintenance
+#### Weekly Maintenance
 
 ```sql
 -- 1. Check total write-sets replicated
@@ -281,7 +281,7 @@ SHOW BINARY LOGS;
 
 ---
 
-### Monitoring Flow Control (CRITICAL for Performance)
+#### Monitoring Flow Control (CRITICAL for Performance)
 
 ```sql
 -- Current flow control status
@@ -307,7 +307,7 @@ SET GLOBAL wsrep_slave_threads = 16;
 
 ---
 
-### Node Maintenance — Safe Restart
+#### Node Maintenance — Safe Restart
 
 **Single node restart (cluster stays up):**
 
@@ -360,7 +360,7 @@ sudo systemctl start mysqld
 
 ---
 
-### Backup Strategy
+#### Backup Strategy
 
 ```bash
 # Online backup using xtrabackup (no downtime)
