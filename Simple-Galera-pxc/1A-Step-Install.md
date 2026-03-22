@@ -1,4 +1,4 @@
-# Percona XtraDB Cluster (PXC) 8.0 — Setup Guide (Battle-Tested)
+### Percona XtraDB Cluster (PXC) 8.0 — Setup Guide
 
 **Updated with all real-world errors encountered and fixed during actual deployment.**
 
