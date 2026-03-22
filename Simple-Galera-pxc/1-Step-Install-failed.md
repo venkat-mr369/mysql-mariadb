@@ -118,7 +118,7 @@ mysql -uroot -p
 ```
 
 ```sql
-ALTER USER 'root'@'localhost' IDENTIFIED BY 'YourNewRootPass1!';
+ALTER USER 'root'@'localhost' IDENTIFIED BY 'Root@123';
 ```
 
 Then stop MySQL:
