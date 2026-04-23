@@ -1,4 +1,4 @@
-# MySQL Clusters Setup Documentation
+## MySQL Clusters Setup Documentation
 
 This repository contains setup and configuration details for three types of MySQL clusters:
 
