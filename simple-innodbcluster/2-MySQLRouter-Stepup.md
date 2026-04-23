@@ -1,15 +1,15 @@
-👉 MySQL Router Installation on vm4 for App Connecting
+### MySQL Router Installation on vm4 for App Connecting
 
 ```bash
 [venkat@oel9-vm1 ~]
 ```
 
-❌ You should not on vm1
-👉 We must do everything on **vm4 (10.10.100.104)**
+❌ You should not on oel9-vm1
+👉 We must do everything on **oel9-vm4 (10.10.100.104)**
 
 ---
 
-### 🔥 COMPLETE CLEAN SETUP (vm4 only)
+#### COMPLETE CLEAN SETUP (vm4 only)
 
 ---
 
