@@ -1,4 +1,4 @@
-## MySQL Clusters Setup Documentation
+### MySQL Clusters Setup Documentation
 
 This repository contains setup and configuration details for three types of MySQL clusters:
 
@@ -10,7 +10,7 @@ The document includes node details, ports, users, and essential commands.
 
 ---
 
-## InnoDB Cluster
+### InnoDB Cluster
 
 ### Overview
 
@@ -38,7 +38,7 @@ prodCluster
 
 ---
 
-## Galera Cluster
+### Galera Cluster
 
 ### Overview
 
@@ -74,7 +74,7 @@ galera_cluster
 
 ---
 
-## NDB Cluster
+### NDB Cluster
 
 ### Overview
 
@@ -156,7 +156,7 @@ ndb_mgm
 
 ---
 
-## Notes
+#### Notes
 
 * InnoDB Cluster uses Group Replication internally
 * Port 33061 is required for Group Replication
@@ -165,4 +165,4 @@ ndb_mgm
 
 ---
 
-End of Document
+
