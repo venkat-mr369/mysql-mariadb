@@ -1,167 +1,168 @@
-# MySQL Cluster Setup Details
+# MySQL Clusters Setup Documentation
 
-This document contains details of all configured clusters including InnoDB Cluster, Galera Cluster, and NDB Cluster. It includes cluster name, nodes, usernames, and passwords for quick reference.
+This repository contains setup and configuration details for three types of MySQL clusters:
 
---------------------------------------------------
+* InnoDB Cluster
+* Galera Cluster
+* NDB Cluster
 
-## 1. InnoDB Cluster
+The document includes node details, ports, users, and essential commands.
 
-Cluster Name:
+---
+
+## InnoDB Cluster
+
+### Overview
+
+MySQL InnoDB Cluster provides high availability using Group Replication.
+
+### Cluster Name
+
 prodCluster
 
-Cluster Type:
-MySQL InnoDB Cluster (Group Replication based)
+### Nodes
 
-Nodes:
+| Node | Hostname | IP Address    | MySQL Port | GR Port |
+| ---- | -------- | ------------- | ---------- | ------- |
+| 1    | oel9-vm1 | 10.10.100.101 | 3306       | 33061   |
+| 2    | oel9-vm2 | 10.10.100.102 | 3306       | 33061   |
+| 3    | oel9-vm3 | 10.10.100.103 | 3306       | 33061   |
 
-Node 1:
-Hostname: oel9-vm1
-IP Address: 10.10.100.101
-MySQL Port: 3306
-GR Port: 33061
+### Users
 
-Node 2:
-Hostname: oel9-vm2
-IP Address: 10.10.100.102
-MySQL Port: 3306
-GR Port: 33061
+| Role           | Username                   | Password         |
+| -------------- | -------------------------- | ---------------- |
+| Cluster Admin  | clusteradmin               | Cluster@123      |
+| Internal Users | mysql_innodb_cluster_1,2,3 | Managed by MySQL |
+| Router User    | mysql_router1              | Managed by MySQL |
 
-Node 3:
-Hostname: oel9-vm3
-IP Address: 10.10.100.103
-MySQL Port: 3306
-GR Port: 33061
+---
 
-Users:
+## Galera Cluster
 
-DBA User:
-Username: venkat
-Privileges: sudo access
+### Overview
 
-Cluster Admin:
-Username: clusteradmin
-Password: Cluster@123
+Galera Cluster provides synchronous multi-master replication.
 
-Internal Cluster Users:
-mysql_innodb_cluster_1
-mysql_innodb_cluster_2
-mysql_innodb_cluster_3
+### Cluster Name
 
-Router User:
-mysql_router1
-
---------------------------------------------------
-
-## 2. Galera Cluster
-
-Cluster Name:
 galera_cluster
 
-Cluster Type:
-Percona XtraDB Cluster / MariaDB Galera Cluster
+### Nodes
 
-Nodes:
+| Node | Hostname | IP Address    |
+| ---- | -------- | ------------- |
+| 1    | oel9-vm1 | 10.10.100.101 |
+| 2    | oel9-vm2 | 10.10.100.102 |
+| 3    | oel9-vm3 | 10.10.100.103 |
 
-Node 1:
-Hostname: oel9-vm1
-IP Address: 10.10.100.101
+### Ports
 
-Node 2:
-Hostname: oel9-vm2
-IP Address: 10.10.100.102
+| Service            | Port |
+| ------------------ | ---- |
+| MySQL              | 3306 |
+| Galera Replication | 4567 |
+| IST                | 4568 |
+| SST                | 4444 |
 
-Node 3:
-Hostname: oel9-vm3
-IP Address: 10.10.100.103
+### Users
 
-Ports Used:
-MySQL Port: 3306
-Galera Replication Ports: 4567, 4568, 4444
+| Role             | Username | Password |
+| ---------------- | -------- | -------- |
+| Root User        | root     | Root@123 |
+| Replication User | repl     | Repl@123 |
 
-Users:
+---
 
-DB User:
-Username: root
-Password: Root@123
+## NDB Cluster
 
-Replication User:
-Username: repl
-Password: Repl@123
+### Overview
 
---------------------------------------------------
+MySQL NDB Cluster is a distributed database with separate data and management nodes.
 
-## 3. NDB Cluster
+### Cluster Name
 
-Cluster Name:
 ndb_cluster
 
-Cluster Type:
-MySQL NDB Cluster
+### Components
 
-Components:
+| Component       | Hostname | IP Address    |
+| --------------- | -------- | ------------- |
+| Management Node | oel9-vm1 | 10.10.100.101 |
+| Data Node 1     | oel9-vm2 | 10.10.100.102 |
+| Data Node 2     | oel9-vm3 | 10.10.100.103 |
+| SQL Node        | oel9-vm1 | 10.10.100.101 |
 
-Management Node:
-Hostname: oel9-vm1
-IP Address: 10.10.100.101
+### Ports
 
-Data Nodes:
-oel9-vm2 (10.10.100.102)
-oel9-vm3 (10.10.100.103)
+| Service           | Port |
+| ----------------- | ---- |
+| Management Server | 1186 |
+| Data Node         | 2202 |
+| MySQL Server      | 3306 |
 
-SQL Node:
-oel9-vm1
+### Users
 
-Ports Used:
-Management Server: 1186
-Data Node: 2202
-MySQL Server: 3306
+| Role       | Username | Password |
+| ---------- | -------- | -------- |
+| Admin User | root     | Root@123 |
 
-Users:
+---
 
-NDB Admin User:
-Username: root
-Password: Root@123
+## Environment Details
 
---------------------------------------------------
+| Parameter     | Value          |
+| ------------- | -------------- |
+| OS            | Oracle Linux 9 |
+| MySQL Version | 8.0.45         |
 
-## Common Configuration
-
-Operating System:
-Oracle Linux 9
-
-MySQL Version:
-8.0.45
-
-Networking:
-All nodes configured in /etc/hosts
-
---------------------------------------------------
-
-## Notes
-
-1. InnoDB Cluster uses Group Replication internally
-2. Port 33061 is mandatory for Group Replication
-3. Galera uses wsrep protocol for replication
-4. NDB Cluster uses separate data and management nodes
-5. Ensure firewall ports are open on all nodes
-6. Always verify cluster status after setup
-
---------------------------------------------------
+---
 
 ## Useful Commands
 
-Check InnoDB Cluster Nodes:
+### InnoDB Cluster
+
+Check cluster nodes:
+
+```
 SELECT * FROM performance_schema.replication_group_members;
+```
 
 Start Group Replication:
+
+```
 START GROUP_REPLICATION;
+```
 
-Check Galera Status:
+---
+
+### Galera Cluster
+
+Check cluster size:
+
+```
 SHOW STATUS LIKE 'wsrep_cluster_size';
+```
 
-Check NDB Status:
+---
+
+### NDB Cluster
+
+Check cluster status:
+
+```
 ndb_mgm
+```
 
---------------------------------------------------
+---
+
+## Notes
+
+* InnoDB Cluster uses Group Replication internally
+* Port 33061 is required for Group Replication
+* Ensure all required ports are open
+* Verify cluster status after setup
+
+---
 
 End of Document
