@@ -1,7 +1,7 @@
 [mysqld]
 
 # =====================================================
-# BASIC NETWORK
+# BASIC NETWORK (Production Important Parameters
 # =====================================================
 
 bind-address=0.0.0.0
