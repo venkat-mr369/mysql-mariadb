@@ -1,4 +1,3 @@
-Venkata, for interviews, don't just memorize the files. Understand the **MySQL 8 startup and transaction flow** and where these files participate.
 
 ## MySQL 8 Datadir Flow
 
