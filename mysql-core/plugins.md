@@ -204,3 +204,6 @@ UNINSTALL PLUGIN plugin_name;
 Interview One-Liner:
 
 "A plugin is a loadable module that extends MySQL or MariaDB functionality such as authentication, auditing, replication, encryption, or storage engines without modifying the database server code."
+
+<img width="1242" height="1266" alt="ChatGPT Image Jun 2, 2026, 05_38_41 PM" src="https://github.com/user-attachments/assets/c2ca650d-e116-41cf-a75b-f855a6fce1fe" />
+
