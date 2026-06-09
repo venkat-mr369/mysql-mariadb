@@ -1,3 +1,4 @@
+```bash
 GitHub Repository
 │
 ├── terraform/
@@ -31,3 +32,4 @@ GitHub Repository
 └── docs/
     ├── architecture.png
     └── deployment-guide.md
+```
