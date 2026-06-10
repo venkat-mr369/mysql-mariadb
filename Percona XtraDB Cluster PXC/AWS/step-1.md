@@ -163,7 +163,7 @@ aws sts get-caller-identity
 
 Output:
 
-```json
+```powershell
 PS E:\terraform-SW\aws-deployment> aws sts get-caller-identity
 {
     "UserId": "AIDARP5CKSNYR5IDF5G5V",
