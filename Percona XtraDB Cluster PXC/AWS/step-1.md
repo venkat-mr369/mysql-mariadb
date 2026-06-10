@@ -138,6 +138,9 @@ Region: us-east-1
 Output: json
 ```
 
+<img width="1540" height="417" alt="image" src="https://github.com/user-attachments/assets/95c006fa-8ebe-4853-af17-b16335d72da6" />
+
+
 AWS created:
 
 ```text
