@@ -1,6 +1,4 @@
-Perfect, Venkata.
 
-You already have:
 
 ```text
 AWS Account       ✅
