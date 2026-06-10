@@ -223,8 +223,12 @@ terraform version
 Output:
 
 ```text
+PS E:\terraform-SW\aws-deployment> terraform version
 Terraform v1.14.7
-Platform: windows_amd64
+on windows_amd64
+
+Your version of Terraform is out of date! The latest version
+is 1.15.6. You can update by downloading from https://developer.hashicorp.com/terraform/install
 ```
 
 Status:
