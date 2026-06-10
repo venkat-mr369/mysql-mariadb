@@ -322,4 +322,4 @@ Phase 6
 Deploy PXC Infrastructure
 ```
 
-One important note: the Access Key ID and Secret Access Key were visible in an earlier screenshot. After completing setup, rotate (delete and recreate) that access key for security.
+
