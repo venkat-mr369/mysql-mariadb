@@ -187,6 +187,12 @@ Command:
 
 ```bash
 aws ec2 describe-regions --region us-east-1
+aws ec2 describe-regions --query "Regions[*].RegionName" --output table
+
+aws ec2 describe-regions `
+--query "Regions[*].[RegionName,Endpoint]" `
+--output table
+
 ```
 
 Result:
