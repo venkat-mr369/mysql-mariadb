@@ -164,10 +164,13 @@ aws sts get-caller-identity
 Output:
 
 ```json
+PS E:\terraform-SW\aws-deployment> aws sts get-caller-identity
 {
-  "Account": "102882775921",
-  "Arn": "arn:aws:iam::102882775921:user/terraform-admin"
+    "UserId": "AIDARP5CKSNYR5IDF5G5V",
+    "Account": "102882775921",
+    "Arn": "arn:aws:iam::102882775921:user/terraform-admin"
 }
+
 ```
 
 Verification:
