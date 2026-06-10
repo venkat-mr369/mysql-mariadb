@@ -109,7 +109,9 @@ Access Key ID
 Secret Access Key
 ```
 
-Downloaded credentials.
+Downloaded credentials.(.CSV file)
+<img width="802" height="388" alt="image" src="https://github.com/user-attachments/assets/2c2ad23e-d4ef-460f-9d0e-cc14fab234a0" />
+
 
 ---
 
