@@ -40,6 +40,9 @@ Created dedicated Terraform user
 
 #### Step 3: Create Terraform User
 
+<img width="1741" height="862" alt="image" src="https://github.com/user-attachments/assets/669d73ed-cfac-499a-a1d0-3de099674f8b" />
+
+
 AWS Console:
 
 ```text
