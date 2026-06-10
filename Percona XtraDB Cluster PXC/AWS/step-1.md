@@ -222,7 +222,7 @@ terraform version
 
 Output:
 
-```text
+```powershell
 PS E:\terraform-SW\aws-deployment> terraform version
 Terraform v1.14.7
 on windows_amd64
