@@ -146,10 +146,10 @@ This is simpler and closer to real-world Linux administration.
 Use:
 
 ```text id="x07"
-ProxySQL1
+ProxySQL1 (or) Ansible-VM
 ```
 
-as the Ansible Control Node.
+as the Ansible Control Node. i am using ProxySQL1 Server, Because i am using Personal Subcription due that 
 
 We'll:
 
