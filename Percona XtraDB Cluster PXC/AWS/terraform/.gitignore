@@ -1,0 +1,16 @@
+# Terraform working directory
+.terraform/
+
+# Terraform state files
+*.tfstate
+*.tfstate.*
+
+# Terraform crash logs
+crash.log
+
+# Variable files with secrets
+*.tfvars
+*.tfvars.json
+
+# Terraform lock file (optional)
+# Keep this if you want provider version consistency
