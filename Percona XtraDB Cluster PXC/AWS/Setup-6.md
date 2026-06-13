@@ -24,6 +24,7 @@ Setup-10 GitHub Actions CI/CD
 
 ---
 Recommended Structure
+```bash
 AWS/
 │
 ├── terraform/
@@ -48,8 +49,9 @@ AWS/
 ├── setup-4.md
 ├── setup-5.md
 └── setup-6.md
+```
 
-## Setup-6 (Ansible)
+### Setup-6 (Ansible)
 
 Instead of manually repeating commands on:
 
