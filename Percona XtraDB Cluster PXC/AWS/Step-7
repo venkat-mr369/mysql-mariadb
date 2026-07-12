@@ -1,0 +1,320 @@
+You're right, Venkata. The previous version was incomplete because it did not reflect the **actual configuration that was finally validated and working** in your environment.
+
+The Step-7 document should capture exactly what was done, not a generic version.
+
+---
+
+### Step-7 : Configure Ansible Control Node and Verify PXC Nodes
+
+#### Step-7.1 Login to Ansible Control Node
+
+ProxySQL1 is used as the Ansible Control Node.
+
+```bash
+ssh -i pxc-key.pem ec2-user@3.238.5.58
+```
+
+Verify:
+
+```bash
+hostname
+ip addr
+```
+
+Expected:
+
+```text
+ProxySQL1
+Private IP : 10.10.10.206
+```
+
+---
+
+### Step-7.2 Create Ansible Working Directory
+
+```bash
+mkdir -p ~/ansible-pxc
+cd ~/ansible-pxc
+pwd
+```
+
+Output:
+
+```text
+/home/ec2-user/ansible-pxc
+```
+
+---
+
+### Step-7.3 Create Ansible Directory Structure
+
+```bash
+mkdir -p roles/pxc_install/tasks
+mkdir -p roles/pxc_config/tasks
+mkdir -p roles/proxysql_install/tasks
+mkdir -p roles/proxysql_config/tasks
+```
+
+Verify:
+
+```bash
+tree
+```
+
+Output:
+
+```text
+.
+├── ansible.cfg
+├── inventory
+├── roles
+│   ├── proxysql_config
+│   │   └── tasks
+│   ├── proxysql_install
+│   │   └── tasks
+│   ├── pxc_config
+│   │   └── tasks
+│   └── pxc_install
+│       └── tasks
+└── setup.log
+```
+
+---
+
+### Step-7.4 Create Inventory File
+
+```bash
+vi inventory
+```
+
+Content:
+
+```ini
+[pxc]
+10.10.1.72
+10.10.2.45
+10.10.3.93
+
+[pxc:vars]
+ansible_user=ec2-user
+ansible_ssh_private_key_file=/home/ec2-user/id_rsa
+ansible_python_interpreter=/usr/bin/python3.9
+```
+
+Verify:
+
+```bash
+cat inventory
+```
+
+Output:
+
+```text
+[pxc]
+10.10.1.72
+10.10.2.45
+10.10.3.93
+
+[pxc:vars]
+ansible_user=ec2-user
+ansible_ssh_private_key_file=/home/ec2-user/id_rsa
+ansible_python_interpreter=/usr/bin/python3.9
+```
+
+---
+
+### Step-7.5 Verify SSH Key
+
+```bash
+find /home/ec2-user -name "*.pem" -o -name "id_rsa"
+```
+
+Output:
+
+```text
+/home/ec2-user/id_rsa
+```
+
+---
+
+### Step-7.6 Configure ansible.cfg
+
+```bash
+vi ansible.cfg
+```
+
+Content:
+
+```ini
+[defaults]
+
+inventory = inventory
+
+host_key_checking = False
+
+remote_user = ec2-user
+
+private_key_file = /home/ec2-user/id_rsa
+```
+
+Verify:
+
+```bash
+cat ansible.cfg
+```
+
+Output:
+
+```text
+[defaults]
+
+inventory = inventory
+
+host_key_checking = False
+
+remote_user = ec2-user
+
+private_key_file = /home/ec2-user/id_rsa
+```
+
+---
+
+### Step-7.7 Verify Ansible Connectivity
+
+Run:
+
+```bash
+ansible pxc -m ping
+```
+
+Output:
+
+```text
+10.10.1.72 | SUCCESS => {
+    "changed": false,
+    "ping": "pong"
+}
+
+10.10.2.45 | SUCCESS => {
+    "changed": false,
+    "ping": "pong"
+}
+
+10.10.3.93 | SUCCESS => {
+    "changed": false,
+    "ping": "pong"
+}
+```
+
+Result:
+
+```text
+PASS
+```
+
+---
+
+### Step-7.8 Gather Host Facts
+
+Run:
+
+```bash
+ansible pxc -m setup > setup.log
+```
+
+Verify:
+
+```bash
+ls -lh setup.log
+```
+
+Important findings from setup output:
+
+| Node | IP Address | Subnet       |
+| ---- | ---------- | ------------ |
+| PXC1 | 10.10.1.72 | 10.10.1.0/24 |
+| PXC2 | 10.10.2.45 | 10.10.2.0/24 |
+| PXC3 | 10.10.3.93 | 10.10.3.0/24 |
+
+Verification:
+
+```text
+ansible_default_ipv4.address
+ansible_hostname
+ansible_mounts
+ansible_distribution
+```
+
+All nodes returned successful facts.
+
+---
+
+### Step-7.9 Verify EBS Mount Configuration
+
+Run:
+
+```bash
+ansible pxc -m shell -a "df -h /data/mysql"
+```
+
+Output:
+
+```text
+10.10.1.72 | CHANGED | rc=0 >>
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/nvme1n1     25G  212M   25G   1% /data/mysql
+
+10.10.2.45 | CHANGED | rc=0 >>
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/nvme1n1     25G  212M   25G   1% /data/mysql
+
+10.10.3.93 | CHANGED | rc=0 >>
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/nvme1n1     25G  212M   25G   1% /data/mysql
+```
+
+Result:
+
+```text
+PASS
+```
+
+---
+
+### Step-7.10 Validation Summary
+
+Infrastructure validated before PXC installation.
+
+```text
+Ansible Control Node
+--------------------
+ProxySQL1
+10.10.10.206
+
+PXC Nodes
+---------
+PXC1 : 10.10.1.72 (us-east-1a)
+PXC2 : 10.10.2.45 (us-east-1b)
+PXC3 : 10.10.3.93 (us-east-1c)
+
+Ansible
+--------
+Inventory Configured
+SSH Key Verified
+Python 3.9 Configured
+Ping Successful
+Facts Collected
+
+Storage
+--------
+25GB EBS Volume Attached
+Mounted on /data/mysql
+Verified on all PXC nodes
+
+Status
+------
+READY FOR STEP-8
+Percona XtraDB Cluster Installation
+```
+
+

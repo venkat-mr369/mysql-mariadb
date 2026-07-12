@@ -14,6 +14,15 @@ resource "aws_instance" "pxc1" {
 
   iam_instance_profile = aws_iam_instance_profile.ec2_profile.name
 
+  metadata_options {
+
+    http_endpoint = "enabled"
+
+    http_tokens = "required"
+  }
+
+  user_data = file("${path.module}/scripts/bootstrap-pxc.sh")
+
   root_block_device {
 
     volume_size = 10
@@ -46,6 +55,15 @@ resource "aws_instance" "pxc2" {
 
   iam_instance_profile = aws_iam_instance_profile.ec2_profile.name
 
+  metadata_options {
+
+    http_endpoint = "enabled"
+
+    http_tokens = "required"
+  }
+
+  user_data = file("${path.module}/scripts/bootstrap-pxc.sh")
+
   root_block_device {
 
     volume_size = 10
@@ -62,6 +80,7 @@ resource "aws_instance" "pxc2" {
   }
 }
 
+
 resource "aws_instance" "pxc3" {
 
   ami           = data.aws_ami.amazon_linux.id
@@ -77,6 +96,15 @@ resource "aws_instance" "pxc3" {
   ]
 
   iam_instance_profile = aws_iam_instance_profile.ec2_profile.name
+
+  metadata_options {
+
+    http_endpoint = "enabled"
+
+    http_tokens = "required"
+  }
+
+  user_data = file("${path.module}/scripts/bootstrap-pxc.sh")
 
   root_block_device {
 
@@ -110,6 +138,15 @@ resource "aws_instance" "proxysql1" {
 
   iam_instance_profile = aws_iam_instance_profile.ec2_profile.name
 
+  metadata_options {
+
+    http_endpoint = "enabled"
+
+    http_tokens = "required"
+  }
+
+  user_data = file("${path.module}/scripts/bootstrap-proxysql.sh")
+
   root_block_device {
 
     volume_size = 10
@@ -124,6 +161,7 @@ resource "aws_instance" "proxysql1" {
     Name = "proxysql1"
     Role = "ProxySQL"
   }
+
 }
 
 resource "aws_instance" "proxysql2" {
@@ -142,6 +180,15 @@ resource "aws_instance" "proxysql2" {
 
   iam_instance_profile = aws_iam_instance_profile.ec2_profile.name
 
+  metadata_options {
+
+    http_endpoint = "enabled"
+
+    http_tokens = "required"
+  }
+
+  user_data = file("${path.module}/scripts/bootstrap-proxysql.sh")
+
   root_block_device {
 
     volume_size = 10
@@ -156,4 +203,5 @@ resource "aws_instance" "proxysql2" {
     Name = "proxysql2"
     Role = "ProxySQL"
   }
+
 }
